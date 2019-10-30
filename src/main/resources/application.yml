@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ssm
+  profiles:
+    active: dev
+
+server:
+  port: 7799
+  servlet:
+    context-path: /ssm
+

@@ -1,4 +1,4 @@
-package com.hong.generator;
+package com.hong.ssm.generator;
 
 /**
  * @author wanghong

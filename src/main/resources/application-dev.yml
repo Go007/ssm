@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://172.16.79.5:3306/zzxypm?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      username: root
+      password: csxmgl2012

@@ -1,6 +1,7 @@
 package com.hong.ssm.mapper;
 
 import com.hong.ssm.domain.YyBondYield;
+import com.hong.ssm.domain.YyIssuerInfo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,4 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface DbMapper {
     int insertYyBondYield(YyBondYield yyBondYield);
     YyBondYield findOne();
+
+    int insertYyIssuerInfo(YyIssuerInfo yyIssuerInfo);
+    YyIssuerInfo findByIssuerID(String issuerID);
 }

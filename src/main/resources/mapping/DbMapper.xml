@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hong.ssm.mapper.DbMapper">
     
-    <sql id="baseColumnList">
+    <sql id="yyBondYieldColumnList">
             bondCode,
             shortName,
             fullName,
@@ -15,10 +15,27 @@
             defaultRate,
             assessDate
     </sql>
+
+    <sql id="yyIssuerInfoColumnList">
+            issuerID,
+            issuerName,
+            registerCode,
+            issuerType,
+            yYRating,
+            intrinsicRating,
+            corporateRating,
+            ratingAgency,
+            holder,
+            nature,
+            listed,
+            creditAnalysis,
+            ctExtendInfo,
+            cyExtendInfo
+    </sql>
     
      <insert id="insertYyBondYield" parameterType="com.hong.ssm.domain.YyBondYield">
           insert into yy_bond_yield (
-            <include refid="baseColumnList" />
+            <include refid="yyBondYieldColumnList" />
             )
             values
                 (
@@ -38,5 +55,36 @@
 
     <select id="findOne" resultType="com.hong.ssm.domain.YyBondYield">
         select * from yy_bond_yield limit 0,1
+    </select>
+
+    <insert id="insertYyIssuerInfo" parameterType="com.hong.ssm.domain.YyIssuerInfo">
+        insert into yy_issuer_info (
+        <include refid="yyIssuerInfoColumnList" />
+        )
+        values
+        (
+        #{issuerID},
+        #{issuerName},
+        #{registerCode},
+        #{issuerType},
+        #{yYRating},
+        #{intrinsicRating},
+        #{corporateRating},
+        #{ratingAgency},
+        #{holder},
+        #{nature},
+        #{listed},
+        #{creditAnalysis},
+        #{ctExtendInfoStr},
+        #{cyExtendInfoStr}
+        )
+    </insert>
+
+    <select id="findByIssuerID" resultType="com.hong.ssm.domain.YyIssuerInfo" parameterType="string">
+        select t.ctExtendInfo as ctExtendInfoStr,
+        t.cyExtendInfo as cyExtendInfoStr,
+        t.*
+        from yy_issuer_info t
+        where t.issuerID = #{issuerID}
     </select>
 </mapper>

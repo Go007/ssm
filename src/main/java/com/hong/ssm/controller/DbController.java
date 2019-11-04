@@ -43,11 +43,13 @@ public class DbController {
     @RequestMapping(value = "/findIssuer", produces = { "application/json;charset=UTF-8" })
     public YyIssuerInfo findIssuer(){
         YyIssuerInfo yyIssuerInfo = dbService.getIssuerById("4f64690cef154ad1bfec15c928926486");
-        if (StringUtils.isNotEmpty(yyIssuerInfo.getCtExtendInfoStr())){
-            yyIssuerInfo.setCtExtendInfo(JSON.parseObject(yyIssuerInfo.getCtExtendInfoStr(), CtExtendInfo.class));
-        }
-        if (StringUtils.isNotEmpty(yyIssuerInfo.getCyExtendInfoStr())){
-            yyIssuerInfo.setCyExtendInfo(JSON.parseObject(yyIssuerInfo.getCyExtendInfoStr(), CyExtendInfo.class));
+        if (yyIssuerInfo != null){
+            if (StringUtils.isNotEmpty(yyIssuerInfo.getCtExtendInfoStr())){
+                yyIssuerInfo.setCtExtendInfo(JSON.parseObject(yyIssuerInfo.getCtExtendInfoStr(), CtExtendInfo.class));
+            }
+            if (StringUtils.isNotEmpty(yyIssuerInfo.getCyExtendInfoStr())){
+                yyIssuerInfo.setCyExtendInfo(JSON.parseObject(yyIssuerInfo.getCyExtendInfoStr(), CyExtendInfo.class));
+            }
         }
         return yyIssuerInfo;
     }

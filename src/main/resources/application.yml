@@ -2,7 +2,7 @@ spring:
   application:
     name: ssm
   profiles:
-    active: dev
+    active: pro
   datasource:
     name: mysql_ssm
     type: com.alibaba.druid.pool.DruidDataSource

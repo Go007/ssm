@@ -1,6 +1,6 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://172.16.32.4:3306/csciapi?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      url: jdbc:mysql://172.16.32.4:3306/zzxypm?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       username: pmmysql
-      password: CsciPM@31$2015# /PasswordQWE@
+      password: PasswordQWE@

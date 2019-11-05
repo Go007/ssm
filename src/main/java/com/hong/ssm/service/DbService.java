@@ -61,17 +61,21 @@ public class DbService {
     }
 
     private int writeToYyBondYield(long page,String dateTime){
+        int total = 0;
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("token", TOKEN);
         paramMap.put("page", page);
         paramMap.put("dateTime", dateTime);
         Map<String, Object> result = RequestUtil.doGet(YY_BOND_YIELD_HISTORICAL_COMPANY, paramMap);
-        Object obj = result.get("rows");
-        List<YyBondYield> list = JSON.parseArray(JSON.toJSONString(obj), YyBondYield.class);
-        for (YyBondYield yyBondYield : list) {
-            dbMapper.insertYyBondYield(yyBondYield);
+        if (result != null && result.get("rows")!= null){
+            Object obj = result.get("rows");
+            List<YyBondYield> list = JSON.parseArray(JSON.toJSONString(obj), YyBondYield.class);
+            for (YyBondYield yyBondYield : list) {
+                dbMapper.insertYyBondYield(yyBondYield);
+            }
+            total = (int) result.get("total");
         }
-        return (int) result.get("total");
+        return total;
     }
 
     public void flushYyIssuerInfo() {

@@ -1,11 +1,9 @@
 package com.hong.ssm.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.hong.ssm.domain.CtExtendInfo;
-import com.hong.ssm.domain.CyExtendInfo;
-import com.hong.ssm.domain.YyBondYield;
-import com.hong.ssm.domain.YyIssuerInfo;
+import com.hong.ssm.domain.*;
 import com.hong.ssm.service.DbService;
+import com.hong.ssm.service.ICsciBaseProjectService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +19,9 @@ public class DbController {
 
     @Autowired
     private DbService dbService;
+
+    @Autowired
+    private ICsciBaseProjectService csciBaseProjectService;
 
     @RequestMapping(value = "/flush", produces = { "application/json;charset=UTF-8" })
     public String flush( )  {
@@ -52,5 +53,10 @@ public class DbController {
             }
         }
         return yyIssuerInfo;
+    }
+
+    @RequestMapping(value = "/findProject", produces = { "application/json;charset=UTF-8" })
+    public CsciBaseProject findProject(){
+        return csciBaseProjectService.findById(31602L);
     }
 }

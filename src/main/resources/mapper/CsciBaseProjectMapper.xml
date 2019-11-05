@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hong.ssm.mapper.CsciBaseProjectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hong.ssm.domain.CsciBaseProject">
+        <id column="id" property="id" />
+        <result column="customer_id" property="customerId" />
+        <result column="customer_name" property="customerName" />
+        <result column="mbody_level" property="mbodyLevel" />
+        <result column="rating_date" property="ratingDate" />
+        <result column="rating_agency" property="ratingAgency" />
+        <result column="project_code" property="projectCode" />
+        <result column="project_name" property="projectName" />
+        <result column="type_id" property="typeId" />
+        <result column="type_name" property="typeName" />
+        <result column="ptype_id" property="ptypeId" />
+        <result column="ptype_name" property="ptypeName" />
+        <result column="cstage_ids" property="cstageIds" />
+        <result column="cstage_names" property="cstageNames" />
+        <result column="channel_id" property="channelId" />
+        <result column="channel_name" property="channelName" />
+        <result column="dept_id" property="deptId" />
+        <result column="dept_name" property="deptName" />
+        <result column="cont_names" property="contNames" />
+        <result column="chief" property="chief" />
+        <result column="member_names" property="memberNames" />
+        <result column="status" property="status" />
+        <result column="asso_type" property="assoType" />
+        <result column="proj_set_time" property="projSetTime" />
+        <result column="passed_time" property="passedTime" />
+        <result column="passed_type" property="passedType" />
+        <result column="check_amount" property="checkAmount" />
+        <result column="passed_amount" property="passedAmount" />
+        <result column="archive_time" property="archiveTime" />
+        <result column="pins_id" property="pinsId" />
+        <result column="proj_desc" property="projDesc" />
+        <result column="is_normal" property="isNormal" />
+        <result column="creator" property="creator" />
+        <result column="rec_gen_time" property="recGenTime" />
+        <result column="updater" property="updater" />
+        <result column="rec_upd_time" property="recUpdTime" />
+        <result column="proTypeId" property="proTypeId" />
+        <result column="sonProTypeId" property="sonProTypeId" />
+    </resultMap>
+
+</mapper>

@@ -29,9 +29,10 @@ public class ExcelController {
             String fileName = URLEncoder.encode("近期公开债卷发行产品信息", "UTF-8");
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
             // 这里需要设置不关闭流
-            EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
+           /* EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
                     .autoCloseStream(Boolean.FALSE).sheet("近期公开债卷发行产品信息")
-                    .doWrite(data());
+                    .doWrite(data());*/
+           dynamicHeadWrite(response);
         } catch (Exception e) {
             // 重置response
             response.reset();
@@ -58,4 +59,49 @@ public class ExcelController {
         return list;
     }
 
+    /**
+     * 动态头，实时生成头写入
+     * <p>
+     * 思路是这样子的，先创建List<String>头格式的sheet仅仅写入头,然后通过table 不写入头的方式 去写入数据
+     *
+     * <p>
+     * 1. 创建excel对应的实体对象
+     * <p>
+     * 2. 然后写入table即可
+     */
+    private void dynamicHeadWrite(HttpServletResponse response) throws IOException {
+        EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
+                .autoCloseStream(Boolean.FALSE)
+                // 这里放入动态头
+                .head(head())
+                .sheet("近期公开债卷发行产品信息")
+                .doWrite(data());
+    }
+
+    private List<List<String>> head() {
+        List<List<String>> list = new ArrayList<>();
+        List<String> head0 = new ArrayList<>();
+        head0.add("债券基本信息");
+        head0.add("债券代码");
+        List<String> head1 = new ArrayList<>();
+        head1.add("债券基本信息");
+        head1.add("债券简称");
+        List<String> head2 = new ArrayList<>();
+        head2.add("债券基本信息");
+        head2.add("剩余期限(年)");
+        List<String> head3 = new ArrayList<>();
+        head3.add("YY数据(2019-11-06更新)");
+        head3.add("YY估值");
+        List<String> head4 = new ArrayList<>();
+        head4.add("YY数据(2019-11-06更新)");
+        head4.add("YY违约率");
+
+        list.add(head0);
+        list.add(head1);
+        list.add(head2);
+        list.add(head3);
+        list.add(head4);
+
+        return list;
+    }
 }

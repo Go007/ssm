@@ -1,0 +1,186 @@
+2019-11-04 17:21:55.953  INFO 12336 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 12336 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 17:21:55.955  INFO 12336 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 17:21:57.634  INFO 12336 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 17:21:57.663  INFO 12336 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 17:21:57.664  INFO 12336 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 17:21:57.675  INFO 12336 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 17:21:57.805  INFO 12336 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 17:21:57.806  INFO 12336 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1726 ms
+2019-11-04 17:21:57.910  INFO 12336 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 17:21:58.319  INFO 12336 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 17:21:58.768  INFO 12336 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:21:59.133  INFO 12336 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 17:21:59.138  INFO 12336 --- [main] com.hong.ssm.Application                 : Started Application in 3.976 seconds (JVM running for 4.958)
+2019-11-04 17:22:15.179  INFO 12336 --- [Thread-11] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:22:15.188  INFO 12336 --- [Thread-11] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-11-04 17:35:26.832  INFO 11496 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 11496 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 17:35:26.837  INFO 11496 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 17:35:28.473  INFO 11496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 17:35:28.504  INFO 11496 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 17:35:28.504  INFO 11496 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 17:35:28.517  INFO 11496 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 17:35:28.647  INFO 11496 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 17:35:28.648  INFO 11496 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1738 ms
+2019-11-04 17:35:28.749  INFO 11496 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 17:35:29.183  INFO 11496 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 17:35:29.664  INFO 11496 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:35:29.923  INFO 11496 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-11-04 17:35:30.072  INFO 11496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 17:35:30.077  INFO 11496 --- [main] com.hong.ssm.Application                 : Started Application in 4.047 seconds (JVM running for 4.966)
+2019-11-04 17:36:32.840  INFO 11496 --- [Thread-10] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2019-11-04 17:36:32.845  INFO 11496 --- [Thread-10] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:36:32.854  INFO 11496 --- [Thread-10] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-11-04 17:36:51.134  INFO 11620 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 11620 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 17:36:51.139  INFO 11620 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 17:36:52.968  INFO 11620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 17:36:53.002  INFO 11620 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 17:36:53.002  INFO 11620 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 17:36:53.012  INFO 11620 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 17:36:53.145  INFO 11620 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 17:36:53.145  INFO 11620 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1887 ms
+2019-11-04 17:36:53.265  INFO 11620 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 17:36:53.735  INFO 11620 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 17:36:54.254  INFO 11620 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:36:54.508  INFO 11620 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-11-04 17:36:54.649  INFO 11620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 17:36:54.653  INFO 11620 --- [main] com.hong.ssm.Application                 : Started Application in 4.238 seconds (JVM running for 5.122)
+2019-11-04 17:37:07.875  INFO 11620 --- [Thread-12] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2019-11-04 17:37:07.879  INFO 11620 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:37:07.883  INFO 11620 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-11-04 17:53:08.409  INFO 8180 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 8180 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 17:53:08.414  INFO 8180 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 17:53:10.075  INFO 8180 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 17:53:10.104  INFO 8180 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 17:53:10.104  INFO 8180 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 17:53:10.113  INFO 8180 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 17:53:10.240  INFO 8180 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 17:53:10.240  INFO 8180 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1711 ms
+2019-11-04 17:53:10.347  INFO 8180 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 17:53:10.771  INFO 8180 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 17:53:11.306  INFO 8180 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:53:11.561  INFO 8180 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-11-04 17:53:14.744  INFO 8180 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()开始同步数据
+2019-11-04 17:53:17.110  INFO 8180 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 17:53:17.116  INFO 8180 --- [main] com.hong.ssm.Application                 : Started Application in 9.439 seconds (JVM running for 10.393)
+2019-11-04 17:54:40.666  INFO 8180 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()结束同步数据
+2019-11-04 17:54:40.668  INFO 8180 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()开始同步数据
+2019-11-04 17:54:40.801  INFO 8180 --- [Thread-13] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2019-11-04 17:54:40.805  INFO 8180 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:54:40.812  INFO 8180 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-11-04 17:54:55.964  INFO 11196 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 11196 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 17:54:55.968  INFO 11196 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 17:54:57.666  INFO 11196 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 17:54:57.694  INFO 11196 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 17:54:57.694  INFO 11196 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 17:54:57.702  INFO 11196 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 17:54:57.831  INFO 11196 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 17:54:57.831  INFO 11196 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1740 ms
+2019-11-04 17:54:57.929  INFO 11196 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 17:54:58.328  INFO 11196 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 17:54:58.780  INFO 11196 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:54:59.013  INFO 11196 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-11-04 17:55:39.082  INFO 11196 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()开始同步数据
+2019-11-04 17:55:40.779  INFO 11196 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 17:55:40.787  INFO 11196 --- [main] com.hong.ssm.Application                 : Started Application in 45.562 seconds (JVM running for 46.545)
+2019-11-04 17:56:45.672  INFO 11196 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()结束同步数据
+2019-11-04 17:56:45.673  INFO 11196 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()开始同步数据
+2019-11-04 17:56:45.837  INFO 11196 --- [Thread-13] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2019-11-04 17:56:45.841  INFO 11196 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:56:45.845  INFO 11196 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-11-04 17:57:10.567  INFO 11676 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 11676 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 17:57:10.571  INFO 11676 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 17:57:12.443  INFO 11676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 17:57:12.475  INFO 11676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 17:57:12.476  INFO 11676 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 17:57:12.486  INFO 11676 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 17:57:12.613  INFO 11676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 17:57:12.613  INFO 11676 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1916 ms
+2019-11-04 17:57:12.729  INFO 11676 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 17:57:13.176  INFO 11676 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 17:57:13.721  INFO 11676 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:57:13.982  INFO 11676 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-11-04 17:57:14.132  INFO 11676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 17:57:14.136  INFO 11676 --- [main] com.hong.ssm.Application                 : Started Application in 4.312 seconds (JVM running for 5.235)
+2019-11-04 17:57:32.854  INFO 11676 --- [Thread-12] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2019-11-04 17:57:32.861  INFO 11676 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-04 17:57:32.870  INFO 11676 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-11-04 18:05:57.968  INFO 9800 --- [main] com.hong.ssm.Application                 : Starting Application on xyyview3-17 with PID 9800 (D:\IDEAProj\ssm\target\classes started by wanghong in D:\IDEAProj\ssm)
+2019-11-04 18:05:58.023  INFO 9800 --- [main] com.hong.ssm.Application                 : The following profiles are active: pro
+2019-11-04 18:05:59.606  INFO 9800 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7799 (http)
+2019-11-04 18:05:59.633  INFO 9800 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-04 18:05:59.633  INFO 9800 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-11-04 18:05:59.645  INFO 9800 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\developer\JDK\jdk1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\developer\xshell6\;D:\app\wanghong\product\11.2.0\dbhome_3\bin;D:\app\wanghong\product\11.2.0\dbhome_2\bin;D:\app\wanghong\product\11.2.0\dbhome_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\ThinPrint\;C:\Program Files\SASHome\Secure\ccme4;C:\Program Files\SASHome\x86\Secure\ccme4;D:\developer\nodejs\;D:\developer\nodejs;D:\Users\wanghong\AppData\Local\Microsoft\WindowsApps;D:\developer\JDK\jdk1.8.0\bin;D:\developer\JDK\jdk1.8.0\jre\bin;D:\developer\maven-3.2.1\bin;D:\developer\Fiddler;D:\developer\groovy-2.5.8\bin;D:\developer\gradle-4.4.1\bin;D:\Users\wanghong\AppData\Roaming\npm;.]
+2019-11-04 18:05:59.777  INFO 9800 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring embedded WebApplicationContext
+2019-11-04 18:05:59.778  INFO 9800 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1681 ms
+2019-11-04 18:05:59.880  INFO 9800 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-11-04 18:06:00.374  INFO 9800 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-04 18:06:00.852  INFO 9800 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-04 18:06:01.095  INFO 9800 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2019-11-04 18:06:01.237  INFO 9800 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7799 (http) with context path '/ssm'
+2019-11-04 18:06:01.241  INFO 9800 --- [main] com.hong.ssm.Application                 : Started Application in 3.988 seconds (JVM running for 4.897)
+2019-11-04 18:06:10.632  INFO 9800 --- [http-nio-7799-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/ssm]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-11-04 18:06:10.632  INFO 9800 --- [http-nio-7799-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-11-04 18:06:10.642  INFO 9800 --- [http-nio-7799-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-11-04 22:59:59.499  INFO 9800 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()开始同步数据
+2019-11-04 23:05:58.353  INFO 9800 --- [scheduling-1] com.hong.ssm.schedule.YyDataSyncTask     : YyDataSyncTask.yYBondYieldCompanySync()结束同步数据
+2019-11-04 23:58:13.185 ERROR 9800 --- [http-nio-7799-exec-2] o.a.c.c.C.[.[.[.[dispatcherServlet]      : Servlet.service() for servlet [dispatcherServlet] in context with path [/ssm] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+
+java.lang.NullPointerException: null
+	at com.hong.ssm.service.DbService.writeToYyBondYield(DbService.java:69)
+	at com.hong.ssm.service.DbService.flushYyBondYield(DbService.java:44)
+	at com.hong.ssm.controller.DbController.flush(DbController.java:27)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+

@@ -2,7 +2,7 @@ spring:
   application:
     name: ssm
   profiles:
-    active: local
+    active: dev
   datasource:
     name: mysql_ssm
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql8.0以前使用com.mysql.jdbc.Driver

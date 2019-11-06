@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -42,7 +43,7 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
     /**
      * 评级时间
      */
-    private LocalDate ratingDate;
+    private Date ratingDate;
 
     /**
      * 评级机构
@@ -137,12 +138,12 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
     /**
      * 立项时间
      */
-    private LocalDateTime projSetTime;
+    private Date projSetTime;
 
     /**
      * 过会时间
      */
-    private LocalDateTime passedTime;
+    private Date passedTime;
 
     /**
      * 过会金额类型(1、仅增信，2、仅投资，3、增信&投资)
@@ -162,7 +163,7 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
     /**
      * 归档时间
      */
-    private LocalDateTime archiveTime;
+    private Date archiveTime;
 
     /**
      * 流程实例ID
@@ -187,7 +188,7 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
     /**
      * 创建时间
      */
-    private LocalDateTime recGenTime;
+    private Date recGenTime;
 
     /**
      * 更新人
@@ -197,7 +198,7 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
     /**
      * 更新时间
      */
-    private LocalDateTime recUpdTime;
+    private Date recUpdTime;
 
     /**
      * 项目一级分类(详情见数据字典：proTypeId)
@@ -244,11 +245,11 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
         this.mbodyLevel = mbodyLevel;
     }
 
-    public LocalDate getRatingDate() {
+    public Date getRatingDate() {
         return ratingDate;
     }
 
-    public void setRatingDate(LocalDate ratingDate) {
+    public void setRatingDate(Date ratingDate) {
         this.ratingDate = ratingDate;
     }
 
@@ -396,20 +397,12 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
         this.assoType = assoType;
     }
 
-    public LocalDateTime getProjSetTime() {
+    public Date getProjSetTime() {
         return projSetTime;
     }
 
-    public void setProjSetTime(LocalDateTime projSetTime) {
+    public void setProjSetTime(Date projSetTime) {
         this.projSetTime = projSetTime;
-    }
-
-    public LocalDateTime getPassedTime() {
-        return passedTime;
-    }
-
-    public void setPassedTime(LocalDateTime passedTime) {
-        this.passedTime = passedTime;
     }
 
     public Long getPassedType() {
@@ -434,14 +427,6 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
 
     public void setPassedAmount(BigDecimal passedAmount) {
         this.passedAmount = passedAmount;
-    }
-
-    public LocalDateTime getArchiveTime() {
-        return archiveTime;
-    }
-
-    public void setArchiveTime(LocalDateTime archiveTime) {
-        this.archiveTime = archiveTime;
     }
 
     public Long getPinsId() {
@@ -476,28 +461,12 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
         this.creator = creator;
     }
 
-    public LocalDateTime getRecGenTime() {
-        return recGenTime;
-    }
-
-    public void setRecGenTime(LocalDateTime recGenTime) {
-        this.recGenTime = recGenTime;
-    }
-
     public Long getUpdater() {
         return updater;
     }
 
     public void setUpdater(Long updater) {
         this.updater = updater;
-    }
-
-    public LocalDateTime getRecUpdTime() {
-        return recUpdTime;
-    }
-
-    public void setRecUpdTime(LocalDateTime recUpdTime) {
-        this.recUpdTime = recUpdTime;
     }
 
     public Long getProTypeId() {
@@ -563,5 +532,37 @@ public class CsciBaseProject extends Model<CsciBaseProject> {
         ", proTypeId=" + proTypeId +
         ", sonProTypeId=" + sonProTypeId +
         "}";
+    }
+
+    public Date getPassedTime() {
+        return passedTime;
+    }
+
+    public void setPassedTime(Date passedTime) {
+        this.passedTime = passedTime;
+    }
+
+    public Date getArchiveTime() {
+        return archiveTime;
+    }
+
+    public void setArchiveTime(Date archiveTime) {
+        this.archiveTime = archiveTime;
+    }
+
+    public Date getRecGenTime() {
+        return recGenTime;
+    }
+
+    public void setRecGenTime(Date recGenTime) {
+        this.recGenTime = recGenTime;
+    }
+
+    public Date getRecUpdTime() {
+        return recUpdTime;
+    }
+
+    public void setRecUpdTime(Date recUpdTime) {
+        this.recUpdTime = recUpdTime;
     }
 }

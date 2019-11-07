@@ -32,7 +32,8 @@ public class ExcelController {
            /* EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
                     .autoCloseStream(Boolean.FALSE).sheet("近期公开债卷发行产品信息")
                     .doWrite(data());*/
-           dynamicHeadWrite(response);
+           String date = "2019-11-06";
+           dynamicHeadWrite(response,date);
         } catch (Exception e) {
             // 重置response
             response.reset();
@@ -69,16 +70,16 @@ public class ExcelController {
      * <p>
      * 2. 然后写入table即可
      */
-    private void dynamicHeadWrite(HttpServletResponse response) throws IOException {
+    private void dynamicHeadWrite(HttpServletResponse response,String date) throws IOException {
         EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
                 .autoCloseStream(Boolean.FALSE)
                 // 这里放入动态头
-                .head(head())
+                .head(head(date))
                 .sheet("近期公开债卷发行产品信息")
                 .doWrite(data());
     }
 
-    private List<List<String>> head() {
+    private List<List<String>> head(String date) {
         List<List<String>> list = new ArrayList<>();
         List<String> head0 = new ArrayList<>();
         head0.add("债券基本信息");
@@ -90,10 +91,10 @@ public class ExcelController {
         head2.add("债券基本信息");
         head2.add("剩余期限(年)");
         List<String> head3 = new ArrayList<>();
-        head3.add("YY数据(2019-11-06更新)");
+        head3.add("YY数据(" + date + "更新)");
         head3.add("YY估值");
         List<String> head4 = new ArrayList<>();
-        head4.add("YY数据(2019-11-06更新)");
+        head4.add("YY数据(" + date + "更新");
         head4.add("YY违约率");
 
         list.add(head0);

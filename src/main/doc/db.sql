@@ -36,6 +36,8 @@ update_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMES
 PRIMARY KEY (SID) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='YY债券估值';
 
+ALTER TABLE yy_bond_yield ADD INDEX index_issuerName(issuerName);
+
 CREATE TABLE `csci_base_project` (
   `id` bigint(20) NOT NULL COMMENT '主键',
   `customer_id` bigint(20) DEFAULT NULL COMMENT '客户ID',
@@ -77,3 +79,54 @@ CREATE TABLE `csci_base_project` (
   `sonProTypeId` bigint(20) DEFAULT NULL COMMENT '项目二级分类(详情见数据字典)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='基础项目'
+
+#主体信用评估表
+CREATE TABLE `csciapi_chengtou_company_rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` decimal(16,0) DEFAULT NULL COMMENT '发行主体ID',
+  `company_name` varchar(100) DEFAULT NULL COMMENT '发行主体名称',
+  `region` decimal(38,0) DEFAULT NULL COMMENT '地区编号',
+  `category` varchar(100) DEFAULT NULL COMMENT 'YY类型',
+  `yy_rating` varchar(16) DEFAULT NULL COMMENT 'YY评级',
+  `yy_rating_dt` datetime DEFAULT NULL COMMENT 'YY评级日期',
+  `yy_province_rank` varchar(16) DEFAULT NULL COMMENT 'YY同省排名',
+  `yy_province_percent` decimal(10,2) DEFAULT NULL COMMENT 'YY同省百分位',
+  `yy_white_rank` varchar(16) DEFAULT NULL COMMENT 'YY白名单排名',
+  `yy_white_percent` decimal(10,2) DEFAULT NULL COMMENT 'YY白名单百分位',
+  `yy_out_rank` varchar(16) DEFAULT NULL COMMENT 'YY外部排名',
+  `yy_out_percent` decimal(10,2) DEFAULT NULL COMMENT 'YY外部百分位',
+  `yy_country_rank` varchar(16) DEFAULT NULL COMMENT 'YY全国排名',
+  `yy_country_percent` decimal(10,2) DEFAULT NULL COMMENT 'YY全国百分位',
+  `cscs_rating` varchar(16) DEFAULT NULL COMMENT 'cscs评级',
+  `cscs_rating_dt` datetime DEFAULT NULL COMMENT 'cscs评级日期',
+  `cscs_province_rank` varchar(16) DEFAULT NULL COMMENT 'cscs同省排名',
+  `cscs_province_percent` decimal(10,2) DEFAULT NULL COMMENT 'cscs同省百分位',
+  `cscs_white_rank` varchar(16) DEFAULT NULL COMMENT 'cscs白名单排名',
+  `cscs_white_percent` decimal(10,2) DEFAULT NULL COMMENT 'cscs白名单百分位',
+  `cscs_out_rank` varchar(16) DEFAULT NULL COMMENT 'cscs外部排名',
+  `cscs_out_percent` decimal(10,2) DEFAULT NULL COMMENT 'cscs外部百分位',
+  `cscs_country_rank` varchar(16) DEFAULT NULL COMMENT 'cscs全国排名',
+  `cscs_country_percent` decimal(10,2) DEFAULT NULL COMMENT 'cscs全国百分位',
+  `out_rating` varchar(16) DEFAULT NULL COMMENT '外部评级',
+  `out_rating_dt` datetime DEFAULT NULL COMMENT '外部评级日期',
+  `out_province_rank` varchar(16) DEFAULT NULL COMMENT '外部同省排名',
+  `out_province_percent` decimal(10,2) DEFAULT NULL COMMENT '外部同省百分位',
+  `out_white_rank` varchar(16) DEFAULT NULL COMMENT '外部白名单排名',
+  `out_white_percent` decimal(10,2) DEFAULT NULL COMMENT '外部白名单百分位',
+  `out_country_rank` varchar(16) DEFAULT NULL COMMENT '外部全国排名',
+  `out_country_percent` decimal(10,2) DEFAULT NULL COMMENT '外部全国百分位',
+  `dm_rating` decimal(8,2) DEFAULT NULL COMMENT 'DM评分',
+  `dm_rating_dt` datetime DEFAULT NULL COMMENT 'DM评分日期',
+  `dm_province_rank` varchar(16) DEFAULT NULL COMMENT 'dm同省排名',
+  `dm_province_percent` decimal(10,2) DEFAULT NULL COMMENT 'dm同省百分位',
+  `dm_white_rank` varchar(16) DEFAULT NULL COMMENT 'dm白名单排名',
+  `dm_white_percent` decimal(10,2) DEFAULT NULL COMMENT 'dm白名单百分位',
+  `dm_out_rank` varchar(16) DEFAULT NULL COMMENT 'dm外部排名',
+  `dm_out_percent` decimal(10,2) DEFAULT NULL COMMENT 'dm外部百分位',
+  `dm_country_rank` varchar(16) DEFAULT NULL COMMENT 'dm全国排名',
+  `dm_country_percent` decimal(10,2) DEFAULT NULL COMMENT 'dm全国百分位',
+  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `i1` (`company_id`),
+  KEY `i2` (`company_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8192 DEFAULT CHARSET=utf8 COMMENT='主体信用评估';

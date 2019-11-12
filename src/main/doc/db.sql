@@ -19,22 +19,24 @@ CREATE TABLE `yy_issuer_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='YY主体信息'
 
 # YY估值表
-CREATE TABLE yy_bond_yield (
-sid INT(16) NOT NULL AUTO_INCREMENT,
-bondCode VARCHAR(200) DEFAULT NULL COMMENT '债券代码',
-shortName VARCHAR(200) DEFAULT NULL COMMENT '债券简称',
-fullName VARCHAR(200) DEFAULT NULL COMMENT '债券全称',
-bondType VARCHAR(200) DEFAULT NULL COMMENT '债券类型',
-issueMethod VARCHAR(200) DEFAULT NULL COMMENT '发行方式',
-issuerName VARCHAR(200) DEFAULT NULL COMMENT '发行人',
-customType VARCHAR(200) DEFAULT NULL COMMENT '债券类型',
-residualMaturity VARCHAR(200) DEFAULT NULL COMMENT '剩余期限',
-bondYield DECIMAL(20,4) DEFAULT NULL COMMENT '估值',
-defaultRate DECIMAL(20,4) DEFAULT NULL COMMENT '违约率',
-assessDate VARCHAR(50) DEFAULT NULL COMMENT '估算日期',
-update_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-PRIMARY KEY (SID) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='YY债券估值';
+CREATE TABLE `yy_bond_yield` (
+  `sid` int(16) NOT NULL AUTO_INCREMENT,
+  `bondCode` varchar(200) DEFAULT NULL COMMENT '债券代码',
+  `shortName` varchar(200) DEFAULT NULL COMMENT '债券简称',
+  `fullName` varchar(200) DEFAULT NULL COMMENT '债券全称',
+  `bondType` varchar(200) DEFAULT NULL COMMENT '债券类型',
+  `issueMethod` varchar(200) DEFAULT NULL COMMENT '发行方式',
+  `issuerName` varchar(200) DEFAULT NULL COMMENT '发行人',
+  `customType` varchar(200) DEFAULT NULL COMMENT '债券类型',
+  `residualMaturity` varchar(200) DEFAULT NULL COMMENT '剩余期限',
+  `bondYield` decimal(20,4) DEFAULT NULL COMMENT '估值',
+  `defaultRate` decimal(20,4) DEFAULT NULL COMMENT '违约率',
+  `assessDate` varchar(50) DEFAULT NULL COMMENT '估算日期',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`sid`) USING BTREE,
+  KEY `i1` (`issuerName`) USING BTREE,
+  KEY `i2` (`bondCode`)
+) ENGINE=InnoDB AUTO_INCREMENT=2169311 DEFAULT CHARSET=utf8 COMMENT='YY债券估值';
 
 ALTER TABLE yy_bond_yield ADD INDEX index_issuerName(issuerName);
 
@@ -130,3 +132,64 @@ CREATE TABLE `csciapi_chengtou_company_rating` (
   KEY `i1` (`company_id`),
   KEY `i2` (`company_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8192 DEFAULT CHARSET=utf8 COMMENT='主体信用评估';
+
+CREATE TABLE `csciapi_chengtou_china_bond_info` (
+  `sid` int(16) NOT NULL AUTO_INCREMENT,
+  `bond_code` varchar(20) DEFAULT NULL COMMENT '债券代码',
+  `bond_name` varchar(200) DEFAULT NULL COMMENT '债券简称',
+  `net_price` decimal(20,4) DEFAULT NULL COMMENT '估值净价（元）',
+  `yield_rate` decimal(20,4) DEFAULT NULL COMMENT '估值收益率(%)',
+  `assess_date` datetime DEFAULT NULL COMMENT '估值日期',
+  `implied_rating` varchar(20) DEFAULT NULL COMMENT '隐含评级',
+  `rating_date` datetime DEFAULT NULL COMMENT '评级日期',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`sid`) USING BTREE,
+  KEY `i1` (`bond_code`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=131071 DEFAULT CHARSET=utf8 COMMENT='中债估值级评级';
+
+
+# 近期公开债券发行产品信息
+SELECT
+d.sid,
+d.`bondCode`,
+d.`shortName`,
+d.`residualMaturity`,
+d.`bondYield`,
+d.`defaultRate`,
+b.`implied_rating`,
+b.`net_price`,
+b.`yield_rate`,
+d.`assessDate`,
+b.`assess_date`
+FROM
+(SELECT a.* FROM yy_bond_yield a,
+(SELECT shortName,MAX(update_date) max_date FROM yy_bond_yield GROUP BY shortName) c
+WHERE a.`shortName`=c.shortName AND a.`update_date`=c.max_date
+AND a.`issuerName`='重庆九龙园高新产业集团有限公司') d
+LEFT JOIN csciapi_chengtou_china_bond_info b
+ON d.bondCode=CONCAT(b.bond_code,".IB")
+ORDER BY d.`assessDate` DESC,d.`shortName` DESC
+LIMIT 0,5;
+
+SELECT
+a.sid,
+a.bondCode,
+a.shortName,
+a.residualMaturity,
+a.bondYield,
+a.defaultRate,
+c.implied_rating,
+c.net_price,
+c.yield_rate,
+a.assessDate,
+c.assess_date
+FROM yy_bond_yield a
+LEFT JOIN (SELECT bondCode,MAX(update_date) max_date FROM yy_bond_yield WHERE issuerName='重庆九龙园高新产业集团有限公司' GROUP BY shortName)b
+ON a.bondCode=b.bondCode AND a.update_date=b.max_date
+LEFT JOIN (SELECT bond_code,MAX(implied_rating) implied_rating,MAX(net_price) net_price,MAX(yield_rate) yield_rate,MAX(assess_date) assess_date
+FROM csciapi_chengtou_china_bond_info GROUP BY 1) c
+ON CAST(SUBSTRING_INDEX(b.bondCode,'.',1) AS DECIMAL)=CAST(c.bond_code AS DECIMAL)
+WHERE b.bondCode<>''
+LIMIT 0,5;
+
+

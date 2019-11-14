@@ -3,6 +3,7 @@ package com.hong.ssm.controller;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.hong.ssm.domain.BondIssuerInfo;
+import com.hong.ssm.domain.CsciapiChengtouCompanyRating;
 import com.hong.ssm.excel.PoiUtil;
 import com.hong.ssm.service.DbService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -329,8 +330,8 @@ public class ExcelController {
     @RequestMapping(value = "/poi2")
     public void poi2(HttpServletResponse response) throws IOException {
         Workbook workbook = new HSSFWorkbook();
-
-        List<Map<String, Object>> list = dbService.jinQiGkZjFxCpInfo("吉林市城市建设控股集团有限公司");
+        String companyName = "吉林市城市建设控股集团有限公司";
+        List<Map<String, Object>> list = dbService.jinQiGkZjFxCpInfo(companyName);
         if (CollectionUtils.isEmpty(list)) {
             return;
         }
@@ -349,11 +350,80 @@ public class ExcelController {
         headerMap.put("债券基本信息", Arrays.asList("债券代码", "债券简称", "剩余期限"));
         headerMap.put("中债数据(" + zzDate + "更新)", Arrays.asList("隐含评级", "估价净价", "估值收益率(%)"));
         headerMap.put("YY数据(" + yyDate + "更新)", Arrays.asList("YY估值", "YY违约率"));
-
         String[] columnKeys = {"bondCode", "shortName", "residualMaturity", "impliedRating", "netPrice", "yieldRate", "bondYield", "defaultRate"};
-
-
         builderExcel(workbook, sheetName, headerMap, list, columnKeys);
+
+        sheetName = "主体信用评估表";
+        headerMap = new LinkedHashMap<>();
+        headerMap.put("评估情况", Arrays.asList("评估维度", "评分", "最新更新时间"));
+        headerMap.put("与同省城投平台对比", Arrays.asList("百分位", "排名"));
+        headerMap.put("与白名单中城投平台对比", Arrays.asList("百分位", "排名"));
+        headerMap.put("与同外评城投平台对比", Arrays.asList("百分位", "排名"));
+        headerMap.put("与全国所有城投平台对比", Arrays.asList("百分位", "排名"));
+        String[] columnKeys2 = {"ratingDimension", "rating", "ratingDt",
+                "provincePercent", "provinceRank", "whitePercent", "whiteRank",
+                "outPercent","outRank","countryPercent","countryRank"};
+        CsciapiChengtouCompanyRating rating = dbService.getZxCtCompanyRating(companyName);
+        List<Map<String,Object>> list2 = new LinkedList<>();
+        Map<String,Object> m;
+        if (rating != null){
+            m = new LinkedHashMap<>();
+            m.put("ratingDimension","外部评级");
+            m.put("rating",rating.getOutRating());
+            m.put("ratingDt",rating.getOutRatingDt());
+            m.put("provincePercent",rating.getOutProvincePercent());
+            m.put("provinceRank",rating.getOutProvinceRank());
+            m.put("whitePercent",rating.getOutWhitePercent());
+            m.put("whiteRank",rating.getOutWhiteRank());
+            m.put("outPercent","-");
+            m.put("outRank","-");
+            m.put("countryPercent",rating.getOutCountryPercent());
+            m.put("countryRank",rating.getOutCountryRank());
+            list2.add(m);
+
+            m = new LinkedHashMap<>();
+            m.put("ratingDimension","YY等级");
+            m.put("rating",rating.getYyRating());
+            m.put("ratingDt",rating.getYyRatingDt());
+            m.put("provincePercent",rating.getYyProvincePercent());
+            m.put("provinceRank",rating.getYyProvinceRank());
+            m.put("whitePercent",rating.getYyWhitePercent());
+            m.put("whiteRank",rating.getYyWhiteRank());
+            m.put("outPercent",rating.getYyOutPercent());
+            m.put("outRank",rating.getYyOutRank());
+            m.put("countryPercent",rating.getYyCountryPercent());
+            m.put("countryRank",rating.getYyCountryRank());
+            list2.add(m);
+
+            m = new LinkedHashMap<>();
+            m.put("ratingDimension","CSCS评级");
+            m.put("rating",rating.getCscsRating());
+            m.put("ratingDt",rating.getCscsRatingDt());
+            m.put("provincePercent",rating.getCscsProvincePercent());
+            m.put("provinceRank",rating.getCscsProvinceRank());
+            m.put("whitePercent",rating.getCscsWhitePercent());
+            m.put("whiteRank",rating.getCscsWhiteRank());
+            m.put("outPercent",rating.getCscsOutPercent());
+            m.put("outRank",rating.getCscsOutRank());
+            m.put("countryPercent",rating.getCscsCountryPercent());
+            m.put("countryRank",rating.getCscsCountryRank());
+            list2.add(m);
+
+            m = new LinkedHashMap<>();
+            m.put("ratingDimension","DM评分");
+            m.put("rating",rating.getDmRating());
+            m.put("ratingDt",rating.getDmRatingDt());
+            m.put("provincePercent",rating.getDmProvincePercent());
+            m.put("provinceRank",rating.getDmProvinceRank());
+            m.put("whitePercent",rating.getDmWhitePercent());
+            m.put("whiteRank",rating.getDmWhiteRank());
+            m.put("outPercent",rating.getDmOutPercent());
+            m.put("outRank",rating.getDmOutRank());
+            m.put("countryPercent",rating.getDmCountryPercent());
+            m.put("countryRank",rating.getDmCountryRank());
+            list2.add(m);
+        }
+        builderExcel(workbook, sheetName, headerMap, list2, columnKeys2);
 
         String downFileName = "项目风控量化报告.xls";
         try {

@@ -1,6 +1,7 @@
 package com.hong.ssm.service;
 
 import com.alibaba.fastjson.JSON;
+import com.hong.ssm.domain.CsciapiChengtouCompanyRating;
 import com.hong.ssm.domain.YyBondYield;
 import com.hong.ssm.domain.YyIssuerInfo;
 import com.hong.ssm.mapper.DbMapper;
@@ -113,6 +114,10 @@ public class DbService {
 
     public List<Map<String,Object>> jinQiGkZjFxCpInfo(String issuerName){
         return dbMapper.jinQiGkZjFxCpInfo(issuerName);
+    }
+
+    public CsciapiChengtouCompanyRating getZxCtCompanyRating(String companyName){
+        return dbMapper.getZxCtCompanyRating(companyName);
     }
 }
 

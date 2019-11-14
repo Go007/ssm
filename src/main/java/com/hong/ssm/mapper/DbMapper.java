@@ -1,5 +1,6 @@
 package com.hong.ssm.mapper;
 
+import com.hong.ssm.domain.CsciapiChengtouCompanyRating;
 import com.hong.ssm.domain.YyBondYield;
 import com.hong.ssm.domain.YyIssuerInfo;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,6 @@ public interface DbMapper {
     YyIssuerInfo findByIssuerID(String issuerID);
 
     List<Map<String,Object>> jinQiGkZjFxCpInfo(String issuerName);
+
+    CsciapiChengtouCompanyRating getZxCtCompanyRating(String companyName);
 }

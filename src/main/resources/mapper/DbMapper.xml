@@ -127,4 +127,63 @@
 		ON CAST(SUBSTRING_INDEX(b.bondCode,'.',1) AS DECIMAL)=CAST(c.bond_code AS DECIMAL)
 		<![CDATA[WHERE b.bondCode<>'']]>
     </select>
+
+    <resultMap id="CsciapiChengtouCompanyRatingMap" type="com.hong.ssm.domain.CsciapiChengtouCompanyRating">
+        <id column="id" property="id" />
+        <result column="company_id" property="companyId" />
+        <result column="company_name" property="companyName" />
+        <result column="region" property="region" />
+        <result column="category" property="category" />
+        <result column="yy_rating" property="yyRating" />
+        <result column="yy_rating_dt" property="yyRatingDt" />
+        <result column="yy_province_rank" property="yyProvinceRank" />
+        <result column="yy_province_percent" property="yyProvincePercent" />
+        <result column="yy_white_rank" property="yyWhiteRank" />
+        <result column="yy_white_percent" property="yyWhitePercent" />
+        <result column="yy_out_rank" property="yyOutRank" />
+        <result column="yy_out_percent" property="yyOutPercent" />
+        <result column="yy_country_rank" property="yyCountryRank" />
+        <result column="yy_country_percent" property="yyCountryPercent" />
+        <result column="cscs_rating" property="cscsRating" />
+        <result column="cscs_rating_dt" property="cscsRatingDt" />
+        <result column="cscs_province_rank" property="cscsProvinceRank" />
+        <result column="cscs_province_percent" property="cscsProvincePercent" />
+        <result column="cscs_white_rank" property="cscsWhiteRank" />
+        <result column="cscs_white_percent" property="cscsWhitePercent" />
+        <result column="cscs_out_rank" property="cscsOutRank" />
+        <result column="cscs_out_percent" property="cscsOutPercent" />
+        <result column="cscs_country_rank" property="cscsCountryRank" />
+        <result column="cscs_country_percent" property="cscsCountryPercent" />
+        <result column="out_rating" property="outRating" />
+        <result column="out_rating_dt" property="outRatingDt" />
+        <result column="out_province_rank" property="outProvinceRank" />
+        <result column="out_province_percent" property="outProvincePercent" />
+        <result column="out_white_rank" property="outWhiteRank" />
+        <result column="out_white_percent" property="outWhitePercent" />
+        <result column="out_country_rank" property="outCountryRank" />
+        <result column="out_country_percent" property="outCountryPercent" />
+        <result column="dm_rating" property="dmRating" />
+        <result column="dm_rating_dt" property="dmRatingDt" />
+        <result column="dm_province_rank" property="dmProvinceRank" />
+        <result column="dm_province_percent" property="dmProvincePercent" />
+        <result column="dm_white_rank" property="dmWhiteRank" />
+        <result column="dm_white_percent" property="dmWhitePercent" />
+        <result column="dm_out_rank" property="dmOutRank" />
+        <result column="dm_out_percent" property="dmOutPercent" />
+        <result column="dm_country_rank" property="dmCountryRank" />
+        <result column="dm_country_percent" property="dmCountryPercent" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <select id="getZxCtCompanyRating"  resultMap="CsciapiChengtouCompanyRatingMap">
+	   SELECT
+		DATE_FORMAT(t.`cscs_rating_dt` ,'%Y-%m-%d') AS cscs_rating_dt,
+		DATE_FORMAT(t.`dm_rating_dt`,'%Y-%m-%d') AS dm_rating_dt,
+		DATE_FORMAT(t.`out_rating_dt`,'%Y-%m-%d') AS out_rating_dt,
+		DATE_FORMAT(t.`yy_rating_dt`,'%Y-%m-%d') AS yy_rating_dt,
+		t.*
+		FROM csciapi_chengtou_company_rating t
+	   WHERE t.company_name=#{companyName}
+	   ORDER BY t.update_date DESC LIMIT 1
+	</select>
 </mapper>

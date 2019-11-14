@@ -4,8 +4,12 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.hong.ssm.domain.BondIssuerInfo;
 import com.hong.ssm.excel.PoiUtil;
+import com.hong.ssm.service.DbService;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +19,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -24,6 +29,9 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/excel")
 public class ExcelController {
+
+    @Autowired
+    private DbService dbService;
 
     @RequestMapping(value = "export")
     public void export(HttpServletResponse response) throws IOException {
@@ -37,8 +45,8 @@ public class ExcelController {
            /* EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
                     .autoCloseStream(Boolean.FALSE).sheet("近期公开债卷发行产品信息")
                     .doWrite(data());*/
-           String date = "2019-11-06";
-           dynamicHeadWrite(response,date);
+            String date = "2019-11-06";
+            dynamicHeadWrite(response, date);
         } catch (Exception e) {
             // 重置response
             response.reset();
@@ -75,7 +83,7 @@ public class ExcelController {
      * <p>
      * 2. 然后写入table即可
      */
-    private void dynamicHeadWrite(HttpServletResponse response,String date) throws IOException {
+    private void dynamicHeadWrite(HttpServletResponse response, String date) throws IOException {
         EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
                 .autoCloseStream(Boolean.FALSE)
                 // 这里放入动态头
@@ -113,16 +121,29 @@ public class ExcelController {
 
     @RequestMapping(value = "/poi")
     public void poi(HttpServletResponse response) throws IOException {
-        Workbook workbook = new XSSFWorkbook();
+        List<Map<String, Object>> list = dbService.jinQiGkZjFxCpInfo("吉林市城市建设控股集团有限公司");
+        if (CollectionUtils.isEmpty(list)) {
+            return;
+        }
+
+        String zzDate = String.valueOf(LocalDate.now().minusDays(1));
+        String yyDate = String.valueOf(LocalDate.now().minusDays(1));
+        if (list.get(0).get("updateDateZz") != null) {
+            zzDate = list.get(0).get("updateDateZz").toString();
+        }
+        if (list.get(0).get("updateDate") != null) {
+            yyDate = list.get(0).get("updateDate").toString();
+        }
+
+        Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("近期公开债卷发行产品信息");
-        // 手动设置列宽。第一个参数表示要为第几列设；，第二个参数表示列的宽度，n为列高的像素数。
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 8; i++) {
             sheet.setColumnWidth((short) i, (short) (35.7 * 150));
         }
         CellStyle style = PoiUtil.getColumnTopStyle(workbook);
-        List< PoiUtil.HeaderNode> nodes = new ArrayList<>();
+        List<PoiUtil.HeaderNode> nodes = new ArrayList<>();
 
-        PoiUtil.HeaderNode headerNode1 = new  PoiUtil.HeaderNode();
+        PoiUtil.HeaderNode headerNode1 = new PoiUtil.HeaderNode();
         headerNode1.setName("债券基本信息");
         headerNode1.setFirstRow(0);
         headerNode1.setLastRow(0);
@@ -130,7 +151,7 @@ public class ExcelController {
         headerNode1.setLastCol(2);
         nodes.add(headerNode1);
 
-        PoiUtil.HeaderNode headerNode10 = new  PoiUtil.HeaderNode();
+        PoiUtil.HeaderNode headerNode10 = new PoiUtil.HeaderNode();
         headerNode10.setName("债券代码");
         headerNode10.setFirstRow(1);
         headerNode10.setLastRow(1);
@@ -138,7 +159,7 @@ public class ExcelController {
         headerNode10.setLastCol(0);
         nodes.add(headerNode10);
 
-        PoiUtil.HeaderNode headerNode11 = new  PoiUtil.HeaderNode();
+        PoiUtil.HeaderNode headerNode11 = new PoiUtil.HeaderNode();
         headerNode11.setName("债券简称");
         headerNode11.setFirstRow(1);
         headerNode11.setLastRow(1);
@@ -146,7 +167,7 @@ public class ExcelController {
         headerNode11.setLastCol(1);
         nodes.add(headerNode11);
 
-        PoiUtil.HeaderNode headerNode12 = new  PoiUtil.HeaderNode();
+        PoiUtil.HeaderNode headerNode12 = new PoiUtil.HeaderNode();
         headerNode12.setName("剩余期限(年)");
         headerNode12.setFirstRow(1);
         headerNode12.setLastRow(1);
@@ -154,62 +175,132 @@ public class ExcelController {
         headerNode12.setLastCol(2);
         nodes.add(headerNode12);
 
-        String date = "2019-11-10";
-        PoiUtil.HeaderNode headerNode2 = new  PoiUtil.HeaderNode();
-        headerNode2.setName("YY数据(" + date + "更新)");
+        PoiUtil.HeaderNode headerNode3 = new PoiUtil.HeaderNode();
+        headerNode3.setName("中债数据(" + zzDate + "更新)");
+        headerNode3.setFirstRow(0);
+        headerNode3.setLastRow(0);
+        headerNode3.setFirstCol(3);
+        headerNode3.setLastCol(5);
+        nodes.add(headerNode3);
+
+        PoiUtil.HeaderNode headerNode30 = new PoiUtil.HeaderNode();
+        headerNode30.setName("隐含评级");
+        headerNode30.setFirstRow(1);
+        headerNode30.setLastRow(1);
+        headerNode30.setFirstCol(3);
+        headerNode30.setLastCol(3);
+        nodes.add(headerNode30);
+
+        PoiUtil.HeaderNode headerNode31 = new PoiUtil.HeaderNode();
+        headerNode31.setName("估价净价");
+        headerNode31.setFirstRow(1);
+        headerNode31.setLastRow(1);
+        headerNode31.setFirstCol(4);
+        headerNode31.setLastCol(4);
+        nodes.add(headerNode31);
+
+        PoiUtil.HeaderNode headerNode32 = new PoiUtil.HeaderNode();
+        headerNode32.setName("估值收益率(%)");
+        headerNode32.setFirstRow(1);
+        headerNode32.setLastRow(1);
+        headerNode32.setFirstCol(5);
+        headerNode32.setLastCol(5);
+        nodes.add(headerNode32);
+
+        PoiUtil.HeaderNode headerNode2 = new PoiUtil.HeaderNode();
+        headerNode2.setName("YY数据(" + yyDate + "更新)");
         headerNode2.setFirstRow(0);
         headerNode2.setLastRow(0);
-        headerNode2.setFirstCol(3);
-        headerNode2.setLastCol(4);
+        headerNode2.setFirstCol(6);
+        headerNode2.setLastCol(7);
         nodes.add(headerNode2);
 
-        PoiUtil.HeaderNode headerNode20 = new  PoiUtil.HeaderNode();
+        PoiUtil.HeaderNode headerNode20 = new PoiUtil.HeaderNode();
         headerNode20.setName("YY估值");
         headerNode20.setFirstRow(1);
         headerNode20.setLastRow(1);
-        headerNode20.setFirstCol(3);
-        headerNode20.setLastCol(3);
+        headerNode20.setFirstCol(6);
+        headerNode20.setLastCol(6);
         nodes.add(headerNode20);
 
-        PoiUtil.HeaderNode headerNode21 = new  PoiUtil.HeaderNode();
+        PoiUtil.HeaderNode headerNode21 = new PoiUtil.HeaderNode();
         headerNode21.setName("YY违约率");
         headerNode21.setFirstRow(1);
         headerNode21.setLastRow(1);
-        headerNode21.setFirstCol(4);
-        headerNode21.setLastCol(4);
+        headerNode21.setFirstCol(7);
+        headerNode21.setLastCol(7);
         nodes.add(headerNode21);
 
         int rowNum = PoiUtil.generateHeader(nodes, sheet, style);
 
         CellStyle cs = PoiUtil.getStyle(workbook);
-        List<BondIssuerInfo> data = data();
-        for (BondIssuerInfo item:data){
+        for (Map<String, Object> item : list) {
             Row row = sheet.createRow(rowNum++);
-           /* row.createCell(0).setCellValue(item.getBondCode());
-            row.createCell(1).setCellValue(item.getShortName());
-            row.createCell(2).setCellValue(item.getResidualMaturity());
-            row.createCell(3).setCellValue(item.getBondYield().toString());
-            row.createCell(4).setCellValue(item.getDefaultRate().toString());*/
 
             Cell cell0 = row.createCell(0);
-            cell0.setCellValue(item.getBondCode());
+            if (item.get("bondCode") != null) {
+                cell0.setCellValue(item.get("bondCode").toString());
+            } else {
+                cell0.setCellValue("");
+            }
             cell0.setCellStyle(cs);
 
             Cell cell1 = row.createCell(1);
-            cell1.setCellValue(item.getShortName());
+            if (item.get("shortName") != null) {
+                cell1.setCellValue(item.get("shortName").toString());
+            } else {
+                cell1.setCellValue("");
+            }
             cell1.setCellStyle(cs);
 
             Cell cell2 = row.createCell(2);
-            cell2.setCellValue(item.getResidualMaturity());
+            if (item.get("residualMaturity") != null) {
+                cell2.setCellValue(item.get("residualMaturity").toString());
+            } else {
+                cell2.setCellValue("");
+            }
             cell2.setCellStyle(cs);
 
             Cell cell3 = row.createCell(3);
-            cell3.setCellValue(item.getBondYield().toString());
+            if (item.get("impliedRating") != null) {
+                cell3.setCellValue(item.get("impliedRating").toString());
+            } else {
+                cell3.setCellValue("");
+            }
             cell3.setCellStyle(cs);
 
             Cell cell4 = row.createCell(4);
-            cell4.setCellValue(item.getDefaultRate().toString());
+            if (item.get("netPrice") != null) {
+                cell4.setCellValue(item.get("netPrice").toString());
+            } else {
+                cell4.setCellValue("");
+            }
             cell4.setCellStyle(cs);
+
+            Cell cell5 = row.createCell(5);
+            if (item.get("yieldRate") != null) {
+                cell5.setCellValue(item.get("yieldRate").toString());
+            } else {
+                cell5.setCellValue("");
+            }
+            cell5.setCellStyle(cs);
+
+            Cell cell6 = row.createCell(6);
+            if (item.get("bondYield") != null) {
+                cell6.setCellValue(item.get("bondYield").toString());
+            } else {
+                cell6.setCellValue("");
+            }
+            cell6.setCellStyle(cs);
+
+            Cell cell7 = row.createCell(7);
+            if (item.get("defaultRate") != null) {
+                cell7.setCellValue(item.get("defaultRate").toString());
+            } else {
+                cell7.setCellValue("");
+            }
+            cell7.setCellStyle(cs);
+
         }
 
         String downFileName = "近期公开债卷发行产品信息.xls";
@@ -223,10 +314,10 @@ public class ExcelController {
         try {
             // 清空response
             response.reset();
-            response.setContentType("application/msexcel");//设置生成的文件类型
+            response.setContentType("application/vnd.ms-excel");//设置生成的文件类型
             response.setCharacterEncoding("UTF-8");//设置文件头编码方式和文件名
             response.setHeader("Content-Disposition", "attachment; filename=" + downFileName);
-            OutputStream os=response.getOutputStream();
+            OutputStream os = response.getOutputStream();
             workbook.write(os);
             os.flush();
             os.close();

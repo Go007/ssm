@@ -87,4 +87,44 @@
         from yy_issuer_info t
         where t.issuerID = #{issuerID}
     </select>
+
+    <resultMap id="GkZjFxCpInfoResultMap" type="hashmap">
+        <result column="sid" property="sid" javaType="long"/>
+        <result column="bondCode" property="bondCode" javaType="string"/>
+        <result column="shortName" property="shortName" javaType="string"/>
+        <result column="residualMaturity" property="residualMaturity" javaType="string"/>
+        <result column="bondYield" property="bondYield" javaType="java.math.BigDecimal"/>
+        <result column="defaultRate" property="defaultRate" javaType="java.math.BigDecimal"/>
+        <result column="implied_rating" property="impliedRating" javaType="string"/>
+        <result column="net_price" property="netPrice" javaType="java.math.BigDecimal"/>
+        <result column="yield_rate" property="yieldRate" javaType="java.math.BigDecimal"/>
+        <result column="assessDate" property="assessDate" javaType="string"/>
+        <result column="assess_date" property="assessDateZz" javaType="string"/>
+        <result column="updateDate" property="updateDate" javaType="string"/>
+        <result column="update_date" property="updateDateZz" javaType="string"/>
+    </resultMap>
+
+    <select id="jinQiGkZjFxCpInfo"  resultMap="GkZjFxCpInfoResultMap" parameterType="string">
+	  SELECT
+		a.sid,
+		a.bondCode,
+		a.shortName,
+		a.residualMaturity,
+		a.bondYield,
+		a.defaultRate,
+		c.implied_rating,
+		c.net_price,
+		c.yield_rate,
+		DATE_FORMAT(a.assessDate,'%Y-%m-%d') AS assessDate,
+		DATE_FORMAT(c.assess_date,'%Y-%m-%d') AS assess_date,
+		DATE_FORMAT(a.update_date,'%Y-%m-%d') AS updateDate,
+		DATE_FORMAT(c.update_date,'%Y-%m-%d') AS update_date
+		FROM yy_bond_yield a
+		LEFT JOIN (SELECT bondCode,MAX(update_date) max_date FROM yy_bond_yield WHERE issuerName=#{issuerName} GROUP BY shortName)b
+		ON a.bondCode=b.bondCode AND a.update_date=b.max_date
+		LEFT JOIN (SELECT bond_code,MAX(implied_rating) implied_rating,MAX(net_price) net_price,MAX(yield_rate) yield_rate,MAX(assess_date) assess_date,MAX(update_date) update_date
+		FROM csciapi_chengtou_china_bond_info GROUP BY 1) c
+		ON CAST(SUBSTRING_INDEX(b.bondCode,'.',1) AS DECIMAL)=CAST(c.bond_code AS DECIMAL)
+		<![CDATA[WHERE b.bondCode<>'']]>
+    </select>
 </mapper>

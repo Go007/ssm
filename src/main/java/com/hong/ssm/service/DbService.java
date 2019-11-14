@@ -110,5 +110,9 @@ public class DbService {
     public YyIssuerInfo getIssuerById(String issuerId) {
         return dbMapper.findByIssuerID(issuerId);
     }
+
+    public List<Map<String,Object>> jinQiGkZjFxCpInfo(String issuerName){
+        return dbMapper.jinQiGkZjFxCpInfo(issuerName);
+    }
 }
 

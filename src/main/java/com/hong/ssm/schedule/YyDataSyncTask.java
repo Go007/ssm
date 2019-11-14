@@ -31,7 +31,7 @@ public class YyDataSyncTask {
     @Autowired
     private DbMapper dbMapper;
 
-   @Scheduled(cron = "0 0 23 * * ?")
+  // @Scheduled(cron = "0 0 23 * * ?")
     //@Scheduled(fixedRate = 3000)
     public void yYBondYieldCompanySync(){
         logger.info("YyDataSyncTask.yYBondYieldCompanySync()开始同步数据");

@@ -325,4 +325,125 @@ public class ExcelController {
             System.out.println("文件流操作异常");
         }
     }
+
+    @RequestMapping(value = "/poi2")
+    public void poi2(HttpServletResponse response) throws IOException {
+        Workbook workbook = new HSSFWorkbook();
+
+        List<Map<String, Object>> list = dbService.jinQiGkZjFxCpInfo("吉林市城市建设控股集团有限公司");
+        if (CollectionUtils.isEmpty(list)) {
+            return;
+        }
+
+        String zzDate = String.valueOf(LocalDate.now().minusDays(1));
+        String yyDate = String.valueOf(LocalDate.now().minusDays(1));
+        if (list.get(0).get("updateDateZz") != null) {
+            zzDate = list.get(0).get("updateDateZz").toString();
+        }
+        if (list.get(0).get("updateDate") != null) {
+            yyDate = list.get(0).get("updateDate").toString();
+        }
+
+        String sheetName = "近期公开债卷发行产品信息";
+        Map<String, List<String>> headerMap = new LinkedHashMap<>();
+        headerMap.put("债券基本信息", Arrays.asList("债券代码", "债券简称", "剩余期限"));
+        headerMap.put("中债数据(" + zzDate + "更新)", Arrays.asList("隐含评级", "估价净价", "估值收益率(%)"));
+        headerMap.put("YY数据(" + yyDate + "更新)", Arrays.asList("YY估值", "YY违约率"));
+
+        String[] columnKeys = {"bondCode", "shortName", "residualMaturity", "impliedRating", "netPrice", "yieldRate", "bondYield", "defaultRate"};
+
+
+        builderExcel(workbook, sheetName, headerMap, list, columnKeys);
+
+        String downFileName = "项目风控量化报告.xls";
+        try {
+            //若不进行编码在IE下会乱码
+            downFileName = URLEncoder.encode(downFileName, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            response.reset();
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + downFileName);
+            OutputStream os = response.getOutputStream();
+            workbook.write(os);
+            os.flush();
+            os.close();
+        } catch (IOException e) {
+            System.out.println("文件流操作异常");
+        }
+    }
+
+    /**
+     * 双行列头Excel导出
+     *
+     * @param workbook
+     * @param sheetName
+     * @param headerMap
+     * @param data
+     * @param columnKeys
+     * @return
+     */
+    private void builderExcel(Workbook workbook, String sheetName, Map<String, List<String>> headerMap, List<Map<String, Object>> data, String[] columnKeys) {
+        List<PoiUtil.HeaderNode> nodes = new ArrayList<>(headerMap.keySet().size() + columnKeys.length);
+        PoiUtil.HeaderNode headerNode = null;
+        List<String> columnList = null;
+        List<String> headerList = new ArrayList<>(headerMap.keySet());
+        int count = 0;
+        for (int i = 0; i < headerList.size(); i++) {
+            String header = headerList.get(i);
+            columnList = headerMap.get(header);
+
+            headerNode = new PoiUtil.HeaderNode();
+            headerNode.setName(header);
+            headerNode.setFirstRow(0);
+            headerNode.setLastRow(0);
+            int firstCol = 0;
+            int step = i;
+            while (step > 0) {
+                firstCol += headerMap.get(headerList.get(--step)).size();
+            }
+            headerNode.setFirstCol(firstCol);
+            headerNode.setLastCol(firstCol + columnList.size() - 1);
+            nodes.add(headerNode);
+
+            count += columnList.size();
+            for (int j = 0; j < columnList.size(); j++) {
+                headerNode = new PoiUtil.HeaderNode();
+                headerNode.setName(columnList.get(j));
+                headerNode.setFirstRow(1);
+                headerNode.setLastRow(1);
+                int col = j == 0 ? firstCol : firstCol + j;
+                headerNode.setFirstCol(col);
+                headerNode.setLastCol(col);
+                nodes.add(headerNode);
+            }
+        }
+        if (count != columnKeys.length) {
+            System.out.println("Excel列名长度设置有误!");
+            return;
+        }
+
+        Sheet sheet = workbook.createSheet(sheetName);
+        for (int i = 0; i < columnKeys.length; i++) {
+            sheet.setColumnWidth((short) i, (short) (35.7 * 150));
+        }
+        CellStyle style = PoiUtil.getColumnTopStyle(workbook);
+        int rowNum = PoiUtil.generateHeader(nodes, sheet, style);
+        CellStyle cs = PoiUtil.getStyle(workbook);
+
+        for (Map<String, Object> item : data) {
+            Row row = sheet.createRow(rowNum++);
+            for (int k = 0;k < columnKeys.length;k++){
+                Cell cell = row.createCell(k);
+                String cellValue = item.get(columnKeys[k]) == null ? "" : item.get(columnKeys[k]).toString();
+                cell.setCellValue(cellValue);
+                cell.setCellStyle(cs);
+            }
+        }
+    }
+
 }

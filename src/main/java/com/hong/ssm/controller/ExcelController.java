@@ -351,7 +351,7 @@ public class ExcelController {
         headerMap.put("中债数据(" + zzDate + "更新)", Arrays.asList("隐含评级", "估价净价", "估值收益率(%)"));
         headerMap.put("YY数据(" + yyDate + "更新)", Arrays.asList("YY估值", "YY违约率"));
         String[] columnKeys = {"bondCode", "shortName", "residualMaturity", "impliedRating", "netPrice", "yieldRate", "bondYield", "defaultRate"};
-        builderExcel(workbook, sheetName, headerMap, list, columnKeys);
+        PoiUtil.builderExcel(workbook, sheetName, headerMap, list, columnKeys);
 
         sheetName = "主体信用评估表";
         headerMap = new LinkedHashMap<>();
@@ -362,68 +362,121 @@ public class ExcelController {
         headerMap.put("与全国所有城投平台对比", Arrays.asList("百分位", "排名"));
         String[] columnKeys2 = {"ratingDimension", "rating", "ratingDt",
                 "provincePercent", "provinceRank", "whitePercent", "whiteRank",
-                "outPercent","outRank","countryPercent","countryRank"};
+                "outPercent", "outRank", "countryPercent", "countryRank"};
         CsciapiChengtouCompanyRating rating = dbService.getZxCtCompanyRating(companyName);
-        List<Map<String,Object>> list2 = new LinkedList<>();
-        Map<String,Object> m;
-        if (rating != null){
+        List<Map<String, Object>> list2 = new LinkedList<>();
+        Map<String, Object> m;
+        if (rating != null) {
             m = new LinkedHashMap<>();
-            m.put("ratingDimension","外部评级");
-            m.put("rating",rating.getOutRating());
-            m.put("ratingDt",rating.getOutRatingDt());
-            m.put("provincePercent",rating.getOutProvincePercent());
-            m.put("provinceRank",rating.getOutProvinceRank());
-            m.put("whitePercent",rating.getOutWhitePercent());
-            m.put("whiteRank",rating.getOutWhiteRank());
-            m.put("outPercent","-");
-            m.put("outRank","-");
-            m.put("countryPercent",rating.getOutCountryPercent());
-            m.put("countryRank",rating.getOutCountryRank());
+            m.put("ratingDimension", "外部评级");
+            m.put("rating", rating.getOutRating());
+            m.put("ratingDt", rating.getOutRatingDt());
+            m.put("provincePercent", rating.getOutProvincePercent());
+            m.put("provinceRank", rating.getOutProvinceRank());
+            m.put("whitePercent", rating.getOutWhitePercent());
+            m.put("whiteRank", rating.getOutWhiteRank());
+            m.put("outPercent", "-");
+            m.put("outRank", "-");
+            m.put("countryPercent", rating.getOutCountryPercent());
+            m.put("countryRank", rating.getOutCountryRank());
             list2.add(m);
 
             m = new LinkedHashMap<>();
-            m.put("ratingDimension","YY等级");
-            m.put("rating",rating.getYyRating());
-            m.put("ratingDt",rating.getYyRatingDt());
-            m.put("provincePercent",rating.getYyProvincePercent());
-            m.put("provinceRank",rating.getYyProvinceRank());
-            m.put("whitePercent",rating.getYyWhitePercent());
-            m.put("whiteRank",rating.getYyWhiteRank());
-            m.put("outPercent",rating.getYyOutPercent());
-            m.put("outRank",rating.getYyOutRank());
-            m.put("countryPercent",rating.getYyCountryPercent());
-            m.put("countryRank",rating.getYyCountryRank());
+            m.put("ratingDimension", "YY等级");
+            m.put("rating", rating.getYyRating());
+            m.put("ratingDt", rating.getYyRatingDt());
+            m.put("provincePercent", rating.getYyProvincePercent());
+            m.put("provinceRank", rating.getYyProvinceRank());
+            m.put("whitePercent", rating.getYyWhitePercent());
+            m.put("whiteRank", rating.getYyWhiteRank());
+            m.put("outPercent", rating.getYyOutPercent());
+            m.put("outRank", rating.getYyOutRank());
+            m.put("countryPercent", rating.getYyCountryPercent());
+            m.put("countryRank", rating.getYyCountryRank());
             list2.add(m);
 
             m = new LinkedHashMap<>();
-            m.put("ratingDimension","CSCS评级");
-            m.put("rating",rating.getCscsRating());
-            m.put("ratingDt",rating.getCscsRatingDt());
-            m.put("provincePercent",rating.getCscsProvincePercent());
-            m.put("provinceRank",rating.getCscsProvinceRank());
-            m.put("whitePercent",rating.getCscsWhitePercent());
-            m.put("whiteRank",rating.getCscsWhiteRank());
-            m.put("outPercent",rating.getCscsOutPercent());
-            m.put("outRank",rating.getCscsOutRank());
-            m.put("countryPercent",rating.getCscsCountryPercent());
-            m.put("countryRank",rating.getCscsCountryRank());
+            m.put("ratingDimension", "CSCS评级");
+            m.put("rating", rating.getCscsRating());
+            m.put("ratingDt", rating.getCscsRatingDt());
+            m.put("provincePercent", rating.getCscsProvincePercent());
+            m.put("provinceRank", rating.getCscsProvinceRank());
+            m.put("whitePercent", rating.getCscsWhitePercent());
+            m.put("whiteRank", rating.getCscsWhiteRank());
+            m.put("outPercent", rating.getCscsOutPercent());
+            m.put("outRank", rating.getCscsOutRank());
+            m.put("countryPercent", rating.getCscsCountryPercent());
+            m.put("countryRank", rating.getCscsCountryRank());
             list2.add(m);
 
             m = new LinkedHashMap<>();
-            m.put("ratingDimension","DM评分");
-            m.put("rating",rating.getDmRating());
-            m.put("ratingDt",rating.getDmRatingDt());
-            m.put("provincePercent",rating.getDmProvincePercent());
-            m.put("provinceRank",rating.getDmProvinceRank());
-            m.put("whitePercent",rating.getDmWhitePercent());
-            m.put("whiteRank",rating.getDmWhiteRank());
-            m.put("outPercent",rating.getDmOutPercent());
-            m.put("outRank",rating.getDmOutRank());
-            m.put("countryPercent",rating.getDmCountryPercent());
-            m.put("countryRank",rating.getDmCountryRank());
+            m.put("ratingDimension", "DM评分");
+            m.put("rating", rating.getDmRating());
+            m.put("ratingDt", rating.getDmRatingDt());
+            m.put("provincePercent", rating.getDmProvincePercent());
+            m.put("provinceRank", rating.getDmProvinceRank());
+            m.put("whitePercent", rating.getDmWhitePercent());
+            m.put("whiteRank", rating.getDmWhiteRank());
+            m.put("outPercent", rating.getDmOutPercent());
+            m.put("outRank", rating.getDmOutRank());
+            m.put("countryPercent", rating.getDmCountryPercent());
+            m.put("countryRank", rating.getDmCountryRank());
             list2.add(m);
+            PoiUtil.builderExcel(workbook, sheetName, headerMap, list2, columnKeys2);
+
+            String downFileName = "项目风控量化报告.xls";
+            try {
+                //若不进行编码在IE下会乱码
+                downFileName = URLEncoder.encode(downFileName, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                response.reset();
+                response.setContentType("application/vnd.ms-excel");
+                response.setCharacterEncoding("UTF-8");
+                response.setHeader("Content-Disposition", "attachment; filename=" + downFileName);
+                OutputStream os = response.getOutputStream();
+                workbook.write(os);
+                os.flush();
+                os.close();
+            } catch (IOException e) {
+                System.out.println("文件流操作异常");
+            }
         }
-        builderExcel(workbook, sheetName, headerMap, list2, columnKeys2);
+    }
+
+    @RequestMapping(value = "/poi3")
+    public void poi3(HttpServletResponse response) throws IOException {
+        Workbook workbook = new HSSFWorkbook();
+        String companyName = "吉林市城市建设控股集团有限公司";
+        List<Map<String, Object>> list = dbService.jinQiGkZjFxCpInfo(companyName);
+        if (CollectionUtils.isEmpty(list)) {
+            return;
+        }
+
+        String sheetName = "近期公开债卷发行产品信息";
+
+        Map<String, Map<String, List<String>>> headerMap = new LinkedHashMap<>();
+        Map<String, List<String>> subHeaderMap0 = new LinkedHashMap<>();
+        subHeaderMap0.put("债券基本信息", Arrays.asList("债券代码", "债券简称"));
+        subHeaderMap0.put("债券期限", Arrays.asList("剩余期限"));
+        headerMap.put("债卷概况", subHeaderMap0);
+
+        Map<String, List<String>> subHeaderMap1 = new LinkedHashMap<>();
+        subHeaderMap1.put("中债评级", Arrays.asList("隐含评级"));
+        subHeaderMap1.put("中债估值", Arrays.asList("估价净价", "估值收益率(%)"));
+        headerMap.put("中债概况", subHeaderMap1);
+
+        Map<String, List<String>> subHeaderMap2 = new LinkedHashMap<>();
+        subHeaderMap2.put("YY估值", Arrays.asList("YY估值"));
+        subHeaderMap2.put("YY违约率", Arrays.asList("YY违约率"));
+        headerMap.put("YY概况", subHeaderMap2);
+
+        String[] columnKeys = {"bondCode", "shortName", "residualMaturity", "impliedRating", "netPrice", "yieldRate", "bondYield", "defaultRate"};
+
+        PoiUtil.builderComplexExcel(workbook, sheetName, headerMap, list, columnKeys);
 
         String downFileName = "项目风控量化报告.xls";
         try {
@@ -446,74 +499,4 @@ public class ExcelController {
             System.out.println("文件流操作异常");
         }
     }
-
-    /**
-     * 双行列头Excel导出
-     *
-     * @param workbook
-     * @param sheetName
-     * @param headerMap
-     * @param data
-     * @param columnKeys
-     * @return
-     */
-    private void builderExcel(Workbook workbook, String sheetName, Map<String, List<String>> headerMap, List<Map<String, Object>> data, String[] columnKeys) {
-        List<PoiUtil.HeaderNode> nodes = new ArrayList<>(headerMap.keySet().size() + columnKeys.length);
-        PoiUtil.HeaderNode headerNode = null;
-        List<String> columnList = null;
-        List<String> headerList = new ArrayList<>(headerMap.keySet());
-        int count = 0;
-        for (int i = 0; i < headerList.size(); i++) {
-            String header = headerList.get(i);
-            columnList = headerMap.get(header);
-
-            headerNode = new PoiUtil.HeaderNode();
-            headerNode.setName(header);
-            headerNode.setFirstRow(0);
-            headerNode.setLastRow(0);
-            int firstCol = 0;
-            int step = i;
-            while (step > 0) {
-                firstCol += headerMap.get(headerList.get(--step)).size();
-            }
-            headerNode.setFirstCol(firstCol);
-            headerNode.setLastCol(firstCol + columnList.size() - 1);
-            nodes.add(headerNode);
-
-            count += columnList.size();
-            for (int j = 0; j < columnList.size(); j++) {
-                headerNode = new PoiUtil.HeaderNode();
-                headerNode.setName(columnList.get(j));
-                headerNode.setFirstRow(1);
-                headerNode.setLastRow(1);
-                int col = j == 0 ? firstCol : firstCol + j;
-                headerNode.setFirstCol(col);
-                headerNode.setLastCol(col);
-                nodes.add(headerNode);
-            }
-        }
-        if (count != columnKeys.length) {
-            System.out.println("Excel列名长度设置有误!");
-            return;
-        }
-
-        Sheet sheet = workbook.createSheet(sheetName);
-        for (int i = 0; i < columnKeys.length; i++) {
-            sheet.setColumnWidth((short) i, (short) (35.7 * 150));
-        }
-        CellStyle style = PoiUtil.getColumnTopStyle(workbook);
-        int rowNum = PoiUtil.generateHeader(nodes, sheet, style);
-        CellStyle cs = PoiUtil.getStyle(workbook);
-
-        for (Map<String, Object> item : data) {
-            Row row = sheet.createRow(rowNum++);
-            for (int k = 0;k < columnKeys.length;k++){
-                Cell cell = row.createCell(k);
-                String cellValue = item.get(columnKeys[k]) == null ? "" : item.get(columnKeys[k]).toString();
-                cell.setCellValue(cellValue);
-                cell.setCellStyle(cs);
-            }
-        }
-    }
-
 }

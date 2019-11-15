@@ -31,7 +31,8 @@ public class PoiUtil {
     }
 
     /**
-     *导入数据获取数据列表
+     * 导入数据获取数据列表
+     *
      * @param wb
      * @return
      */
@@ -130,7 +131,7 @@ public class PoiUtil {
             cell.setCellValue(node.getName());
             cell.setCellStyle(style);
         }
-        return dataStartRow+1;
+        return dataStartRow + 1;
     }
 
     public static class HeaderNode {
@@ -218,6 +219,7 @@ public class PoiUtil {
 
     /**
      * 设置列头单元格样式
+     *
      * @param workbook
      * @return
      */
@@ -264,7 +266,8 @@ public class PoiUtil {
     }
 
     /**
-     *  设置列数据信息单元格样式
+     * 设置列数据信息单元格样式
+     *
      * @param workbook
      * @return
      */
@@ -272,7 +275,7 @@ public class PoiUtil {
         // 设置字体
         Font font = workbook.createFont();
         // 设置字体大小
-        font.setFontHeightInPoints((short)10);
+        font.setFontHeightInPoints((short) 10);
         // 设置字体名字
         font.setFontName("Courier New");
         // 设置样式;
@@ -304,6 +307,170 @@ public class PoiUtil {
         style.setVerticalAlignment(VerticalAlignment.CENTER);
         return style;
     }
+
+    /**
+     * 双行列头Excel导出
+     *
+     * @param workbook
+     * @param sheetName
+     * @param headerMap
+     * @param data
+     * @param columnKeys
+     * @return
+     */
+    public static void builderExcel(Workbook workbook, String sheetName, Map<String, List<String>> headerMap, List<Map<String, Object>> data, String[] columnKeys) {
+        List<PoiUtil.HeaderNode> nodes = new ArrayList<>(headerMap.keySet().size() + columnKeys.length);
+        PoiUtil.HeaderNode headerNode = null;
+        List<String> columnList = null;
+        List<String> headerList = new ArrayList<>(headerMap.keySet());
+        int count = 0;
+        for (int i = 0; i < headerList.size(); i++) {
+            String header = headerList.get(i);
+            columnList = headerMap.get(header);
+
+            headerNode = new PoiUtil.HeaderNode();
+            headerNode.setName(header);
+            headerNode.setFirstRow(0);
+            headerNode.setLastRow(0);
+            int firstCol = 0;
+            int step = i;
+            while (step > 0) {
+                firstCol += headerMap.get(headerList.get(--step)).size();
+            }
+            headerNode.setFirstCol(firstCol);
+            headerNode.setLastCol(firstCol + columnList.size() - 1);
+            nodes.add(headerNode);
+
+            count += columnList.size();
+            for (int j = 0; j < columnList.size(); j++) {
+                headerNode = new PoiUtil.HeaderNode();
+                headerNode.setName(columnList.get(j));
+                headerNode.setFirstRow(1);
+                headerNode.setLastRow(1);
+                int col = j == 0 ? firstCol : firstCol + j;
+                headerNode.setFirstCol(col);
+                headerNode.setLastCol(col);
+                nodes.add(headerNode);
+            }
+        }
+        if (count != columnKeys.length) {
+            System.out.println("Excel列名长度设置有误!");
+            return;
+        }
+
+        Sheet sheet = workbook.createSheet(sheetName);
+        for (int i = 0; i < columnKeys.length; i++) {
+            sheet.setColumnWidth((short) i, (short) (35.7 * 150));
+        }
+        CellStyle style = PoiUtil.getColumnTopStyle(workbook);
+        int rowNum = PoiUtil.generateHeader(nodes, sheet, style);
+        CellStyle cs = PoiUtil.getStyle(workbook);
+
+        for (Map<String, Object> item : data) {
+            Row row = sheet.createRow(rowNum++);
+            for (int k = 0; k < columnKeys.length; k++) {
+                Cell cell = row.createCell(k);
+                String cellValue = item.get(columnKeys[k]) == null ? "" : item.get(columnKeys[k]).toString();
+                cell.setCellValue(cellValue);
+                cell.setCellStyle(cs);
+            }
+        }
+    }
+
+
+    /**
+     * 构建三行表头Excel
+     *
+     * @param workbook
+     * @param sheetName
+     * @param headerMap
+     * @param data
+     * @param columnKeys
+     */
+    public static void builderComplexExcel(Workbook workbook, String sheetName, Map<String, Map<String, List<String>>> headerMap, List<Map<String, Object>> data, String[] columnKeys) {
+        List<PoiUtil.HeaderNode> nodes = new ArrayList<>();
+        PoiUtil.HeaderNode headerNode = null;
+        List<String> columnList = null;
+        List<String> pHeaderList = new ArrayList<>(headerMap.keySet());
+        Map<String, List<String>> subHeaderMap = null;
+        List<String> headerList = null;
+        Map<String,List<String>> preHeadMap = null;
+        int count = 0;
+
+        for (int p = 0; p < pHeaderList.size(); p++) {
+            String pHeader = pHeaderList.get(p);
+            subHeaderMap = headerMap.get(pHeader);
+            headerNode = new PoiUtil.HeaderNode();
+            headerNode.setName(pHeader);
+            headerNode.setFirstRow(0);
+            headerNode.setLastRow(0);
+            int pFirstCol = 0;
+            int pStep = p;
+            while (pStep > 0){
+                preHeadMap = headerMap.get(pHeaderList.get(--pStep));
+                pFirstCol += preHeadMap.values().stream().mapToInt(l -> l.size()).sum();
+            }
+            headerNode.setFirstCol(pFirstCol);
+            headerNode.setLastCol(pFirstCol + subHeaderMap.values().stream().mapToInt(l -> l.size()).sum() - 1);
+            nodes.add(headerNode);
+
+            headerList = new ArrayList<>(subHeaderMap.keySet());
+            for (int i = 0; i < headerList.size(); i++) {
+                String header = headerList.get(i);
+                columnList = subHeaderMap.get(header);
+
+                headerNode = new PoiUtil.HeaderNode();
+                headerNode.setName(header);
+                headerNode.setFirstRow(0);
+                headerNode.setLastRow(0);
+                int firstCol = 0;
+                int step = i;
+                while (step > 0) {
+                    firstCol += headerMap.get(headerList.get(--step)).size();
+                }
+                headerNode.setFirstCol(firstCol);
+                headerNode.setLastCol(firstCol + columnList.size() - 1);
+                nodes.add(headerNode);
+
+                count += columnList.size();
+                for (int j = 0; j < columnList.size(); j++) {
+                    headerNode = new PoiUtil.HeaderNode();
+                    headerNode.setName(columnList.get(j));
+                    headerNode.setFirstRow(1);
+                    headerNode.setLastRow(1);
+                    int col = j == 0 ? firstCol : firstCol + j;
+                    headerNode.setFirstCol(col);
+                    headerNode.setLastCol(col);
+                    nodes.add(headerNode);
+                }
+            }
+        }
+
+        if (count != columnKeys.length) {
+            System.out.println("Excel列名长度设置有误!");
+            return;
+        }
+
+        Sheet sheet = workbook.createSheet(sheetName);
+        for (int i = 0; i < columnKeys.length; i++) {
+            sheet.setColumnWidth((short) i, (short) (35.7 * 150));
+        }
+        CellStyle style = PoiUtil.getColumnTopStyle(workbook);
+        int rowNum = PoiUtil.generateHeader(nodes, sheet, style);
+        CellStyle cs = PoiUtil.getStyle(workbook);
+
+        for (Map<String, Object> item : data) {
+            Row row = sheet.createRow(rowNum++);
+            for (int k = 0; k < columnKeys.length; k++) {
+                Cell cell = row.createCell(k);
+                String cellValue = item.get(columnKeys[k]) == null ? "" : item.get(columnKeys[k]).toString();
+                cell.setCellValue(cellValue);
+                cell.setCellStyle(cs);
+            }
+        }
+
+    }
+
 
   /*  public static void main(String[] args) {
          // 第一步，创建一个webbook，对应一个Excel文件

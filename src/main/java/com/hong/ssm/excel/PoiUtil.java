@@ -421,12 +421,12 @@ public class PoiUtil {
 
                 headerNode = new PoiUtil.HeaderNode();
                 headerNode.setName(header);
-                headerNode.setFirstRow(0);
-                headerNode.setLastRow(0);
-                int firstCol = 0;
+                headerNode.setFirstRow(1);
+                headerNode.setLastRow(1);
+                int firstCol = pFirstCol;
                 int step = i;
                 while (step > 0) {
-                    firstCol += headerMap.get(headerList.get(--step)).size();
+                    firstCol += subHeaderMap.get(headerList.get(--step)).size();
                 }
                 headerNode.setFirstCol(firstCol);
                 headerNode.setLastCol(firstCol + columnList.size() - 1);
@@ -436,8 +436,8 @@ public class PoiUtil {
                 for (int j = 0; j < columnList.size(); j++) {
                     headerNode = new PoiUtil.HeaderNode();
                     headerNode.setName(columnList.get(j));
-                    headerNode.setFirstRow(1);
-                    headerNode.setLastRow(1);
+                    headerNode.setFirstRow(2);
+                    headerNode.setLastRow(2);
                     int col = j == 0 ? firstCol : firstCol + j;
                     headerNode.setFirstCol(col);
                     headerNode.setLastCol(col);

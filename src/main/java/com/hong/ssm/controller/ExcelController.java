@@ -462,7 +462,7 @@ public class ExcelController {
         Map<String, List<String>> subHeaderMap0 = new LinkedHashMap<>();
         subHeaderMap0.put("债券基本信息", Arrays.asList("债券代码", "债券简称"));
         subHeaderMap0.put("债券期限", Arrays.asList("剩余期限"));
-        headerMap.put("债卷概况", subHeaderMap0);
+        headerMap.put("债券概况", subHeaderMap0);
 
         Map<String, List<String>> subHeaderMap1 = new LinkedHashMap<>();
         subHeaderMap1.put("中债评级", Arrays.asList("隐含评级"));

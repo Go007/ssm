@@ -1,7 +1,20 @@
 package com.hong.ssm.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.hong.ssm.domain.ResponseOutDto;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class TokenUtil {
-	/*private static final Logger LOG = LoggerFactory.getLogger(TokenUtil.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TokenUtil.class);
 
 	private static final String TOKEN_VERIFY_URL = "https://portal.chinacscs.com/portal/token/verify";
 	
@@ -91,7 +104,7 @@ public class TokenUtil {
 	}
 	
 	 
-	public static List<Map<String,Object>> getCompanyList(String token,String keyword){
+	public static List<Map<String,Object>> getCompanyList(String token, String keyword){
 		 List<Map<String,Object>> list = new ArrayList();
 		 HttpClientUtil httpClientUtil = HttpClientUtil.getInstance();
 		 Map<String, Object> maps = new HashMap<String, Object>();
@@ -161,5 +174,19 @@ public class TokenUtil {
 		LOG.info("获取Master-token响应信息：[]",obj);
 		return token;
 	}
-	*/
+
+    public static void main(String[] args) {
+        String URL = "https://portal.chinacscs.com/SYService/login";
+        HttpClientUtil httpClientUtil = HttpClientUtil.getInstance();
+        Map<String, String> maps = new HashMap<>();
+        maps.put("username", "XWJY_TEST");
+        maps.put("password", "3D0A5CB9");
+        String bodyString = JSONObject.toJSONString(maps);
+        String res = httpClientUtil.sendHttpPost(URL, bodyString);
+        System.out.println(res);
+
+        //ResponseOutDto response = JSONObject.parseObject(res, ResponseOutDto.class);
+
+
+    }
 }

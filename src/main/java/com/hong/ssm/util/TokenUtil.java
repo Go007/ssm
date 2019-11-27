@@ -177,6 +177,7 @@ public class TokenUtil {
 
     public static void main(String[] args) {
         String URL = "https://portal.chinacscs.com/SYService/login";
+		//String URL = "https://10.100.40.10:8080/SYService/login";
         HttpClientUtil httpClientUtil = HttpClientUtil.getInstance();
         Map<String, String> maps = new HashMap<>();
         maps.put("username", "XWJY_TEST");

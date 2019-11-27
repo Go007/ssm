@@ -7,6 +7,7 @@ import java.security.cert.X509Certificate;
 import java.util.*;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
@@ -474,7 +475,7 @@ public class HttpClientUtil {
     public static void main(String[] args) {
         String MASTER_TOKEN_GET_URL = "http://172.16.32.37:3030/v2/oauth/token";
         HttpClientUtil httpClientUtil = HttpClientUtil.getInstance();
-        Map<String, String> maps = new HashMap<>();
+        /*Map<String, String> maps = new HashMap<>();
         maps.put("username", "csci_hong");
         maps.put("client_id", "clientapp");
         maps.put("grant_type", "password");
@@ -486,7 +487,23 @@ public class HttpClientUtil {
         String res = httpClientUtil.postMap(MASTER_TOKEN_GET_URL,header,maps);
         JSONObject obj = JSON.parseObject(res);
         String token = obj.getString("access_token");
-        System.out.println(token);
+        System.out.println(token);*/
+
+        String url = "http://172.16.254.47:6666/dmp/blacklist/company/tag/db?id=cscipaas&name=北京澳都阳光商贸有限公司";
+        String ress = httpClientUtil.sendHttpGet(url);
+        System.out.println(ress);
+        JSONObject obj = JSON.parseObject(ress);
+        Object data = obj.get("data");
+        if (data != null){
+            JSONArray array = JSON.parseArray(data.toString());
+            if (!array.isEmpty()){
+                JSONObject oo = JSON.parseObject(array.get(0).toString());
+                String blackReason = oo.getString("blackReason");
+                String  blackLatestDt = oo.getString("blackLatestDt");
+                System.out.println(blackReason);
+                System.out.println(blackLatestDt);
+            }
+        }
     }
 
 }

@@ -192,4 +192,17 @@ ON CAST(SUBSTRING_INDEX(b.bondCode,'.',1) AS DECIMAL)=CAST(c.bond_code AS DECIMA
 WHERE b.bondCode<>''
 LIMIT 0,5;
 
+UPDATE csci_base_customer c,(
+SELECT b.`company_id` AS company_id,b.`company_name_new` AS company_name FROM csci_base_customer a
+LEFT JOIN csci_chengtou_customer_list b
+ON a.`id`=b.`customer_id`
+WHERE b.`company_id` IS NOT NULL
+) d SET c.company_id=d.company_id,c.customer_name=d.company_name;
 
+insert into csci_project_area(project_id,project_code,idno6)
+select a.id,a.`project_code`,c.`idno6` from csci_base_project a
+left join csci_base_customer b
+ON b.`id`=a.`customer_id`
+left join csci_chengtou_customer_list c
+on c.`customer_id`=b.`id`
+where c.`idno6` is not null;

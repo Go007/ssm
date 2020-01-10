@@ -1,9 +1,11 @@
 package com.hong.ssm.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.fastjson.JSON;
 import com.hong.ssm.domain.BondIssuerInfo;
 import com.hong.ssm.domain.CsciapiChengtouCompanyRating;
+import com.hong.ssm.domain.ZxhInfo;
 import com.hong.ssm.excel.PoiUtil;
 import com.hong.ssm.service.DbService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -18,10 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author wanghong
@@ -43,11 +47,11 @@ public class ExcelController {
             String fileName = URLEncoder.encode("近期公开债卷发行产品信息", "UTF-8");
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
             // 这里需要设置不关闭流
-           /* EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
+            EasyExcel.write(response.getOutputStream(), BondIssuerInfo.class)
                     .autoCloseStream(Boolean.FALSE).sheet("近期公开债卷发行产品信息")
-                    .doWrite(data());*/
-            String date = "2019-11-06";
-            dynamicHeadWrite(response, date);
+                    .doWrite(data());
+           // String date = "2019-11-06";
+           // dynamicHeadWrite(response, date);
         } catch (Exception e) {
             // 重置response
             response.reset();
@@ -497,6 +501,58 @@ public class ExcelController {
             os.close();
         } catch (IOException e) {
             System.out.println("文件流操作异常");
+        }
+    }
+
+    @RequestMapping(value = "/exportZxh")
+    public void exportZxh(HttpServletResponse response) throws IOException {
+        try {
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            String fileName = URLEncoder.encode("增信函", "UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+            List<Map<String,Object>> list = dbService.zxhList();
+            System.out.println(list.size());
+            Map<String,List<Map<String,Object>>> dataMap = list.stream().collect(Collectors.groupingBy(m -> (String)m.get("letterId")));
+            ZxhInfo zxhInfo = null;
+            Field[] field = ZxhInfo.class.getDeclaredFields();
+            List<ZxhInfo> dataList = new ArrayList<>(dataMap.size());
+            for (Map.Entry<String,List<Map<String,Object>>> entry:dataMap.entrySet()){
+                List<Map<String,Object>> data = entry.getValue();
+                Map<String,String> rowMap = new HashMap<>();
+                for (Map<String,Object> m:data){
+                    if (m.containsKey("letterId")){
+                        rowMap.put("letterId",(String)m.get("letterId"));
+                    }
+                    if (m.containsKey("name")){
+                        rowMap.put((String)m.get("name"),(String)m.get("value"));
+                    }
+                }
+                zxhInfo = new ZxhInfo();
+                for (Field f:field){
+                    if (!f.isAccessible()){
+                        f.setAccessible(true);
+                    }
+                    ExcelProperty pro = f.getAnnotation(ExcelProperty.class);
+                    String name = pro.value()[0];
+                    String value = rowMap.get(name);
+                    f.set(zxhInfo,value);
+                }
+
+                dataList.add(zxhInfo);
+            }
+
+            EasyExcel.write(response.getOutputStream(), ZxhInfo.class)
+                    .autoCloseStream(Boolean.FALSE).sheet("增信函")
+                    .doWrite(dataList);
+        } catch (Exception e) {
+            response.reset();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("status", "failure");
+            map.put("message", "下载文件失败" + e.getMessage());
+            response.getWriter().println(JSON.toJSONString(map));
         }
     }
 }

@@ -23,4 +23,6 @@ public interface DbMapper {
     List<Map<String,Object>> jinQiGkZjFxCpInfo(String issuerName);
 
     CsciapiChengtouCompanyRating getZxCtCompanyRating(String companyName);
+
+    List<Map<String,Object>> zxhList();
 }

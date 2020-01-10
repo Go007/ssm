@@ -119,5 +119,9 @@ public class DbService {
     public CsciapiChengtouCompanyRating getZxCtCompanyRating(String companyName){
         return dbMapper.getZxCtCompanyRating(companyName);
     }
+
+    public List<Map<String,Object>> zxhList(){
+        return dbMapper.zxhList();
+    }
 }
 

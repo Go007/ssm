@@ -27,7 +27,7 @@ public class CodeGenerator {
 		String mapperPackageName = "";
 		// 设置需要生成的表名
 		// 这里如果是MySql表,且没有设置不区分大小写,则表名在数据库中是小写就是小写,否则会报找不到表的错误
-		String[] tableNames = new String[] { "csci_base_project"};
+		String[] tableNames = new String[] { "csci_area_config","csci_chengtou_customer_list"};
 
 		// 数据源配置
 		DataSourceConfig dsc = new DataSourceConfig();

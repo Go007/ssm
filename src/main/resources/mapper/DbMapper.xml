@@ -186,4 +186,9 @@
 	   WHERE t.company_name=#{companyName}
 	   ORDER BY t.update_date DESC LIMIT 1
 	</select>
+
+    <select id="zxhList" resultType="map">
+        SELECT t.`LETTER_ID`,NAME,VALUE
+        FROM t_zxh_letter t LEFT JOIN t_zxh_letter_busi t1 ON t.`ID`=t1.`LETTER_ID` limit 0,1000
+    </select>
 </mapper>

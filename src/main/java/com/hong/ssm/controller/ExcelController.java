@@ -9,6 +9,7 @@ import com.hong.ssm.domain.ZxhInfo;
 import com.hong.ssm.excel.PoiUtil;
 import com.hong.ssm.service.DbService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -538,7 +539,6 @@ public class ExcelController {
                     String value = rowMap.get(name);
                     f.set(zxhInfo,value);
                 }
-
                 dataList.add(zxhInfo);
             }
 

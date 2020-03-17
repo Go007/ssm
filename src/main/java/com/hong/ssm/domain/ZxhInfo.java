@@ -35,6 +35,34 @@ public class ZxhInfo {
     private String dkht;
     @ExcelProperty(value = {"委托担保服务协议"},index = 13)
     private String wtdbxy;
+    @ExcelProperty(value = {"三方协议编号"},index = 14)
+    private String sfxybh;
+    @ExcelProperty(value = {"信用增进服务协议编号"},index = 15)
+    private String xyzjxybh;
+    @ExcelProperty(value = {"借款人名称"},index = 16)
+    private String jkrmc;
+    @ExcelProperty(value = {"借款人法定代表人"},index = 17)
+    private String jkrfddbr;
+    @ExcelProperty(value = {"借款到期日"},index = 18)
+    private String jkdqr;
+    @ExcelProperty(value = {"差额补足协议编号"},index = 19)
+    private String cebzxybh;
+    @ExcelProperty(value = {"本期借款借款利率"},index = 20)
+    private String bqjklv;
+    @ExcelProperty(value = {"本期借款借款金额"},index = 21)
+    private String bqjkje;
+    @ExcelProperty(value = {"流动资金贷款合同编号"},index = 22)
+    private String ldzjdkbh;
+    @ExcelProperty(value = {"用印时间"},index = 23)
+    private String yysj;
+    @ExcelProperty(value = {"电票到期日"},index = 24)
+    private String dpdqr;
+    @ExcelProperty(value = {"电票承兑方"},index = 25)
+    private String dpcdf;
+    @ExcelProperty(value = {"电票票号"},index = 26)
+    private String dpph;
+    @ExcelProperty(value = {"电票质押合同编号"},index = 27)
+    private String dpzyhtbh;
 
     public String getLetterId() {
         return letterId;
@@ -146,5 +174,117 @@ public class ZxhInfo {
 
     public void setWtdbxy(String wtdbxy) {
         this.wtdbxy = wtdbxy;
+    }
+
+    public String getSfxybh() {
+        return sfxybh;
+    }
+
+    public void setSfxybh(String sfxybh) {
+        this.sfxybh = sfxybh;
+    }
+
+    public String getXyzjxybh() {
+        return xyzjxybh;
+    }
+
+    public void setXyzjxybh(String xyzjxybh) {
+        this.xyzjxybh = xyzjxybh;
+    }
+
+    public String getJkrmc() {
+        return jkrmc;
+    }
+
+    public void setJkrmc(String jkrmc) {
+        this.jkrmc = jkrmc;
+    }
+
+    public String getJkrfddbr() {
+        return jkrfddbr;
+    }
+
+    public void setJkrfddbr(String jkrfddbr) {
+        this.jkrfddbr = jkrfddbr;
+    }
+
+    public String getJkdqr() {
+        return jkdqr;
+    }
+
+    public void setJkdqr(String jkdqr) {
+        this.jkdqr = jkdqr;
+    }
+
+    public String getCebzxybh() {
+        return cebzxybh;
+    }
+
+    public void setCebzxybh(String cebzxybh) {
+        this.cebzxybh = cebzxybh;
+    }
+
+    public String getBqjklv() {
+        return bqjklv;
+    }
+
+    public void setBqjklv(String bqjklv) {
+        this.bqjklv = bqjklv;
+    }
+
+    public String getBqjkje() {
+        return bqjkje;
+    }
+
+    public void setBqjkje(String bqjkje) {
+        this.bqjkje = bqjkje;
+    }
+
+    public String getLdzjdkbh() {
+        return ldzjdkbh;
+    }
+
+    public void setLdzjdkbh(String ldzjdkbh) {
+        this.ldzjdkbh = ldzjdkbh;
+    }
+
+    public String getYysj() {
+        return yysj;
+    }
+
+    public void setYysj(String yysj) {
+        this.yysj = yysj;
+    }
+
+    public String getDpdqr() {
+        return dpdqr;
+    }
+
+    public void setDpdqr(String dpdqr) {
+        this.dpdqr = dpdqr;
+    }
+
+    public String getDpcdf() {
+        return dpcdf;
+    }
+
+    public void setDpcdf(String dpcdf) {
+        this.dpcdf = dpcdf;
+    }
+
+    public String getDpph() {
+        return dpph;
+    }
+
+    public void setDpph(String dpph) {
+        this.dpph = dpph;
+    }
+
+    public String getDpzyhtbh() {
+        return dpzyhtbh;
+    }
+
+    public void setDpzyhtbh(String dpzyhtbh) {
+        this.dpzyhtbh = dpzyhtbh;
     }
 }

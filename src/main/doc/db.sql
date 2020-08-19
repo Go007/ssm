@@ -216,3 +216,17 @@ FROM  app_online_user u WHERE u.`company_code` NOT IN (
 SELECT b.`company_code` FROM app_company_auth_business b) AND u.`account_type`='2') xx
 ON v.`user_id`=xx.userId
 AND v.`tx_code`=1304;
+
+-- sql 查询多条去重并根据时间保留最新的一条
+-- not in 和 not exists (MySQL8.0 不支持 exists)
+INSERT INTO app_company_auth_business(user_id,company,company_code,name,id_card,status,tx_sn)
+SELECT xx.user_id,xx.company_name,xx.company_code,xx.name,xx.id_card,'1', v.tx_sn FROM app_cfca_verify v
+INNER JOIN
+(SELECT u.id AS user_id,u.company_code,u.company_name,u.id_card,u.`name`
+FROM  app_online_user u WHERE u.`company_code` NOT IN (
+SELECT b.`company_code` FROM app_company_auth_business b) AND u.`account_type`='2') xx
+ON xx.user_id=v.`user_id`
+INNER JOIN (SELECT user_id,tx_code,MAX(update_time) AS max_update FROM app_cfca_verify GROUP BY user_id,tx_code) b
+ON b.user_id=v.user_id
+AND v.update_time=b.max_update
+AND v.`tx_code`=1304;

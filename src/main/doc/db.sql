@@ -206,3 +206,13 @@ ON b.`id`=a.`customer_id`
 left join csci_chengtou_customer_list c
 on c.`customer_id`=b.`id`
 where c.`idno6` is not null;
+
+
+INSERT INTO app_company_auth_business(user_id,company,company_code,name,id_card,status,tx_sn)
+SELECT xx.userId,xx.company_name,xx.company_code,xx.name,xx.id_card,'1', v.tx_sn FROM app_cfca_verify v
+INNER JOIN
+(SELECT u.id AS userId,u.company_code,u.company_name,u.id_card,u.`name`
+FROM  app_online_user u WHERE u.`company_code` NOT IN (
+SELECT b.`company_code` FROM app_company_auth_business b) AND u.`account_type`='2') xx
+ON v.`user_id`=xx.userId
+AND v.`tx_code`=1304;
